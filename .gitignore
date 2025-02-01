@@ -6,3 +6,4 @@ venv/
 *.dylib
 *.so
 venv/
+.env
