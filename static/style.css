@@ -1,0 +1,129 @@
+/* 🌿 Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #e8e8e8;
+    color: #000000;
+}
+
+/* 🎰 Titre principal */
+h1 {
+    color: #ff5722;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* 🎟️ Boutons stylés */
+button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #060606;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* 🎭 Section Explication */
+#explanation {
+    width: 80%;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 25px;
+    background: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1.6;
+}
+
+/* 📌 Titres secondaires */
+h2 {
+    color: #000000;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+h3 {
+    color: #5bc0de;
+    font-size: 1.5em;
+    margin-top: 15px;
+}
+
+/* 📝 Liste stylée */
+ul {
+    text-align: left;
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin: 10px 0;
+    font-size: 1.1em;
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Ajout d'un petit effet devant chaque item de la liste */
+ul li::before {
+    content: "✔";
+    color: #ff5722;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* 📌 Pied de page */
+footer {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #343a40;
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    border-top: 4px solid #ff5722;
+}
+
+footer a {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* 🖥️ Adaptation mobile */
+@media (max-width: 768px) {
+    #explanation {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    button {
+        width: 80%;
+    }
+}

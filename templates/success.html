@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grille Optimisée</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #28a745;
+        }
+        .grille {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff5722;
+            margin-top: 20px;
+        }
+        .numero-chance {
+            font-size: 20px;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Paiement Réussi ! Voici ta Grille Optimisée 🎟️</h1>
+    
+    <div class="grille">Numéros : {{ grille["grille"] }}</div>
+    <div class="numero-chance">Numéro Chance : {{ grille["numero_chance"] }}</div>
+
+    <a href="/">🔄 Générer une Nouvelle Grille</a>
+
+    <footer>
+        <p>© 2025 Lucky AI - Tous droits réservés.</p>
+        <p>
+            <a href="{{ url_for('mentions_legales') }}">Mentions Légales</a> | 
+            <a href="{{ url_for('cgv') }}">CGV</a> | 
+            <a href="{{ url_for('confidentialite') }}">Politique de Confidentialité</a>
+        </p>
+    </footer>
+
+</body>
+</html>
