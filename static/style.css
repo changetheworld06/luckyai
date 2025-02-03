@@ -169,6 +169,11 @@ footer a:hover {
     text-decoration: underline;
 }
 
+a {
+    position: relative;
+    z-index: 10;
+}
+
 /* 🖥️ Adaptation mobile */
 @media (max-width: 768px) {
     #explanation {
