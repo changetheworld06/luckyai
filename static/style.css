@@ -1,43 +1,85 @@
+/* 🌟 Variables CSS pour une personnalisation aisée */
+:root {
+    --primary-color: #ff5722;
+    --dark-color: #060606;
+    --accent-color: #5bc0de;
+    --bg-color: #e8e8e8;
+    --text-color: #000000;
+    --light-bg: #ffffff;
+    --footer-bg: #343a40;
+    --footer-border: #ff5722;
+    --footer-link: #ffcc00;
+}
+
+/* 🔄 Reset global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* 🌿 Styles généraux */
 body {
     font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--bg-color), #ffffff);
+    color: var(--text-color);
     text-align: center;
-    margin: 0;
-    padding: 0;
-    background-color: #e8e8e8;
-    color: #000000;
+    padding: 20px;
 }
 
 /* 🎰 Titre principal */
 h1 {
-    color: #ff5722;
-    font-size: 30px;
+    color: var(--primary-color);
+    font-size: 2.5em;
     font-weight: bold;
     text-transform: uppercase;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
 /* 🎟️ Boutons stylés */
 button {
-    background-color: #ff5722;
+    background: linear-gradient(45deg, var(--primary-color), #ff8a50);
     color: white;
     border: none;
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 1.125em;
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet "ripple" au survol */
+button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.3);
+    border-radius: 100%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease-out, height 0.4s ease-out;
+}
+
+button:hover::after {
+    width: 200%;
+    height: 200%;
 }
 
 button:hover {
-    background-color: #060606;
-    transform: translateY(-2px);
+    background-color: var(--dark-color);
+    transform: translateY(-4px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 /* 🎭 Section Explication */
@@ -46,22 +88,36 @@ button:active {
     max-width: 800px;
     margin: 30px auto;
     padding: 25px;
-    background: rgb(255, 255, 255);
+    background: var(--light-bg);
     border-radius: 10px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
     text-align: left;
     line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet subtil sur la section */
+#explanation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: skewX(-25deg);
 }
 
 /* 📌 Titres secondaires */
 h2 {
-    color: #000000;
+    color: var(--text-color);
     font-size: 1.8em;
     margin-bottom: 10px;
 }
 
 h3 {
-    color: #5bc0de;
+    color: var(--accent-color);
     font-size: 1.5em;
     margin-top: 15px;
 }
@@ -69,7 +125,7 @@ h3 {
 /* 📝 Liste stylée */
 ul {
     text-align: left;
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
@@ -77,31 +133,32 @@ ul li {
     margin: 10px 0;
     font-size: 1.1em;
     position: relative;
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
-/* Ajout d'un petit effet devant chaque item de la liste */
+/* Petit icône devant chaque item */
 ul li::before {
     content: "✔";
-    color: #ff5722;
+    color: var(--primary-color);
     font-weight: bold;
     position: absolute;
     left: 0;
+    top: 0;
 }
 
 /* 📌 Pied de page */
 footer {
     margin-top: 30px;
     padding: 15px;
-    background-color: #343a40;
+    background-color: var(--footer-bg);
     color: white;
     font-size: 16px;
     text-align: center;
-    border-top: 4px solid #ff5722;
+    border-top: 4px solid var(--footer-border);
 }
 
 footer a {
-    color: #ffcc00;
+    color: var(--footer-link);
     font-weight: bold;
     text-decoration: none;
     transition: color 0.3s;
