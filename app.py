@@ -9,8 +9,7 @@ from random import shuffle
 
 # 🔹 Charger les variables d'environnement
 load_dotenv()  # Charger les variables d'environnement
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY")  # Charger la clé Live
-print("🔑 Clé Stripe chargée ?", os.getenv("STRIPE_SECRET_KEY") is not None)
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY_TEST")  # Charger la clé Live
 
 # 🔹 Définir le chemin du modèle XGBoost
 model_path = "xgboost_model.json"
@@ -48,8 +47,8 @@ def create_checkout_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url="https://www.luckyai.fr/success",
-            cancel_url="https://www.luckyai.fr/cancel",   
+            success_url="http://127.0.0.1:5000/success",
+            cancel_url="http://127.0.0.1:5000/cancel",
         )
         return jsonify({"url": session.url})
     except Exception as e:
