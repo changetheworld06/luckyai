@@ -9,7 +9,8 @@ from random import shuffle
 
 # 🔹 Charger les variables d'environnement
 load_dotenv()  # Charger les variables d'environnement
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY_TEST")  # Charger la clé Live
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")  # Charger la clé Live
+print("🔑 Clé Stripe chargée ?", os.getenv("STRIPE_SECRET_KEY") is not None)
 
 # 🔹 Définir le chemin du modèle XGBoost
 model_path = "xgboost_model.json"
