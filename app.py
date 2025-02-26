@@ -48,8 +48,8 @@ def create_checkout_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url="http://127.0.0.1:5000/success",
-            cancel_url="http://127.0.0.1:5000/cancel",
+            success_url="https://www.luckyai.fr/success",
+            cancel_url="https://www.luckyai.fr/cancel",
         )
         return jsonify({"url": session.url})
     except Exception as e:
