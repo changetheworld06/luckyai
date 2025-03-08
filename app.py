@@ -35,7 +35,12 @@ def home():
 @app.route('/create_checkout_session', methods=['POST'])
 def create_checkout_session():
     try:
-        session = stripe.checkout.Session.create(
+        grille_data = generate_grille().json  # Générer une grille
+
+        # Construire l'URL avec les numéros dans les paramètres GET
+        success_url = f"http://127.0.0.1:5000/success?grille={','.join(map(str, grille_data['grille']))}&chance={grille_data['numero_chance']}"
+
+        session_stripe = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[{
                 'price_data': {
@@ -48,10 +53,11 @@ def create_checkout_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url="https://www.luckyai.fr/success",
-            cancel_url="https://www.luckyai.fr/cancel",
+            success_url=success_url,  # Redirection avec les numéros
+            cancel_url="http://127.0.0.1:5000/cancel",
         )
-        return jsonify({"url": session.url})
+        return jsonify({"url": session_stripe.url})
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -59,9 +65,18 @@ def create_checkout_session():
 def payment_cancel():
     return "❌ Paiement annulé. Reviens quand tu veux !"
 
+from flask import request  # Ajoute cette ligne
+
 @app.route('/success')
 def payment_success():
-    return render_template("success.html", grille=generate_grille().json)
+    grille = request.args.get("grille")  # Lire les numéros depuis l'URL
+    chance = request.args.get("chance")
+
+    if not grille or not chance:
+        return "Erreur : Aucune grille trouvée.", 400
+
+    grille_numbers = grille.split(",")  # Convertir en liste
+    return render_template("success.html", grille=grille_numbers, chance=chance)
 
 @app.route('/mentions-legales')
 def mentions_legales():
