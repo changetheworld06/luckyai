@@ -9,6 +9,7 @@ import os
 import sqlite3
 import json
 import socket
+from flask import send_from_directory
 
 # 🔹 Charger les variables d'environnement
 load_dotenv()
@@ -71,6 +72,10 @@ def get_last_grille_from_db(jeu):
             print("❌ Erreur JSON : Impossible de convertir les données.")
             return None
     return None
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/success')
 def success():
