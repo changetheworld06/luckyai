@@ -20,7 +20,7 @@
             color: #ff5722;
             margin-top: 20px;
         }
-        .numero-chance {
+        .numero-chance, .etoiles {
             font-size: 20px;
             color: #007bff;
             margin-top: 10px;
@@ -42,10 +42,15 @@
 <body>
     <h1>🎉 Paiement Réussi ! Voici ta Grille Optimisée 🎟️</h1>
 
-<div class="grille">Numéros : {{ grille }}</div>
-<div class="numero-chance">Numéro Chance : {{ chance }}</div>
+    {% if jeu == "loto" %}
+        <div class="grille">Numéros : {{ grille["grille"] }}</div>
+        <div class="numero-chance">Numéro Chance : {{ grille["numero_chance"] }}</div>
+    {% elif jeu == "euromillions" %}
+        <div class="grille">Numéros : {{ grille["numeros"] }}</div>
+        <div class="etoiles">Étoiles : {{ grille["etoiles"] }}</div>
+    {% endif %}  <!-- ✅ Fin correcte du bloc conditionnel -->
 
-<a href="/">🔄 Générer une Nouvelle Grille</a>
+    <a href="/">🔄 Générer une Nouvelle Grille</a>
 
     <footer>
         <p>© 2025 Lucky AI - Tous droits réservés.</p>
@@ -55,6 +60,5 @@
             <a href="{{ url_for('confidentialite') }}">Politique de Confidentialité</a>
         </p>
     </footer>
-
 </body>
 </html>
