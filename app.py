@@ -74,6 +74,10 @@ def get_last_grille_from_db(jeu):
             return None
     return None
 
+@app.route('/sitemap.xml')
+def serve_sitemap():
+    return send_from_directory(os.path.join(app.root_path, 'static'), 'sitemap.xml')
+
 @app.route('/robots.txt')
 def serve_robots():
     return send_from_directory(os.path.join(app.root_path, 'static'), 'robots.txt')
