@@ -10,6 +10,7 @@ import sqlite3
 import json
 import socket
 from flask import send_from_directory
+from flask import Flask, send_from_directory
 
 # 🔹 Charger les variables d'environnement
 load_dotenv()
