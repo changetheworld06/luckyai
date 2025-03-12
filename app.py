@@ -73,6 +73,12 @@ def get_last_grille_from_db(jeu):
             return None
     return None
 
+app = Flask(__name__)
+
+@app.route('/robots.txt')
+def serve_robots():
+    return send_from_directory('static', 'robots.txt')
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory('static', 'favicon.ico', mimetype='image/vnd.microsoft.icon')
