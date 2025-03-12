@@ -19,6 +19,7 @@ print("🔑 Clé Stripe chargée ?", os.getenv("STRIPE_SECRET_KEY") is not None)
 
 # ✅ Déclarer l'application Flask
 app = Flask(__name__, static_url_path='/static', template_folder='templates')
+app = Flask(__name__, static_folder="static", template_folder="templates")
 
 # 📌 Configuration de Flask-Session
 app.config["SECRET_KEY"] = "super_secret_key"
