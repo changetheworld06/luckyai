@@ -6,6 +6,18 @@ import pandas as pd
 import os
 import sqlite3
 import json
+from flask import Flask, send_from_directory
+import os
+
+app = Flask(__name__)
+
+# ✅ Route pour servir ads.txt
+@app.route('/ads.txt')
+def ads_txt():
+    return send_from_directory(os.getcwd(), 'ads.txt')
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
 
 # ✅ Déclarer l'application Flask
 app = Flask(__name__, static_url_path='/static', template_folder='templates')
