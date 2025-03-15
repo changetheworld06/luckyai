@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, session
+from flask import Flask, jsonify, render_template, request, send_from_directory
 from flask_session import Session  # 📌 Importer Flask-Session
 import xgboost as xgb
 import numpy as np
@@ -6,18 +6,6 @@ import pandas as pd
 import os
 import sqlite3
 import json
-from flask import Flask, send_from_directory
-import os
-
-app = Flask(__name__)
-
-# ✅ Route pour servir ads.txt
-@app.route('/ads.txt')
-def ads_txt():
-    return send_from_directory(os.getcwd(), 'ads.txt')
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
 
 # ✅ Déclarer l'application Flask
 app = Flask(__name__, static_url_path='/static', template_folder='templates')
@@ -29,6 +17,11 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_USE_SIGNER"] = True
 app.config["SESSION_FILE_DIR"] = "./flask_session"
 Session(app)
+
+# ✅ Route pour servir ads.txt
+@app.route('/ads.txt')
+def ads_txt():
+    return send_from_directory(os.getcwd(), 'ads.txt')
 
 # 🔹 Définir le chemin du modèle XGBoost
 model_path = "xgboost_model.json"
@@ -56,6 +49,7 @@ def save_grille_to_db(jeu, grille):
     conn.commit()
     conn.close()
 
+# ✅ Route d'accueil
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -73,7 +67,6 @@ def get_grille():
         return jsonify({"error": "Jeu inconnu"}), 400
 
     save_grille_to_db(jeu, grille_data)  # 🔥 Enregistrer dans la base de données
-
     return jsonify(grille_data)
 
 @app.route('/generate_grille', methods=['GET'])
@@ -120,6 +113,7 @@ def cgv():
 def confidentialite():
     return render_template("confidentialite.html")
 
+# ✅ Lancer l'application Flask
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
