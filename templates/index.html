@@ -50,6 +50,14 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476"
         crossorigin="anonymous"></script>
+
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('about') }}">À propos</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a href="{{ url_for('blog') }}">Blog</a></li>
+            </ul>
+        </nav>
     </head>
 <body>
 
@@ -57,6 +65,17 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WFM965BT"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <header>
+        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" 
+             alt="Bannière LuckyAI" 
+             style="width:100%; max-height:300px; object-fit:cover;">
+        <p style="text-align:center; font-size:0.8em;">
+            <a href="https://fr.freepik.com/photos-gratuite/fond-humain-poignee-main-robot-ere-numerique-futuriste_17850426.htm">
+                Image de rawpixel.com sur Freepik
+            </a>
+        </p>
+    </header>
 
     <h1>LuckyAI : L'Intelligence Artificielle au Service de Votre Chance</h1>
     <p>Générez une grille de tirage 5+1 L.O.T.O ou 5+2 E.U.R.O.M.I.L.L.I.O.N.S optimisée grâce à notre intelligence artificielle.</p>
@@ -105,6 +124,12 @@
             <a href="{{ url_for('cgv') }}">CGV</a> | 
             <a href="{{ url_for('confidentialite') }}">FAQ</a>
         </p>
+
+        <section class="navigation">
+            <a href="{{ url_for('about') }}" class="btn">À propos</a>
+            <a href="{{ url_for('contact') }}" class="btn">Contact</a>
+            <a href="{{ url_for('blog') }}" class="btn">Blog</a>
+        </section>
     </footer>
 
     <script>

@@ -1,0 +1,35 @@
+<!-- blog.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - LuckyAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Blog - LuckyAI</h1>
+    </header>
+    
+    <section>
+        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" alt="Illustration technologique" style="width:100%; max-height:300px; object-fit:cover;">
+        <p style="text-align:center; font-size:0.8em;">
+            <a href="https://fr.freepik.com/photos-gratuite/arriere-plan-technologique-tactile-remake-moderne-creation-adam_17851045.htm">Image de rawpixel.com sur Freepik</a>
+        </p>
+    </section>
+    
+    <section>
+        <h2>Nos derniers articles</h2>
+        <ul>
+            <li><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></li>
+            <li><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></li>
+            <li><a href="{{ url_for('article', slug='psychologie-et-argent') }}">La psychologie de l’argent : Comment nos émotions influencent nos décisions financières</a></li>
+            <li><a href="{{ url_for('article', slug='strategie-gains-loterie') }}">Que faire si vous gagnez à la loterie ? Stratégies pour bien gérer vos gains</a></li>
+        </ul>
+    </section>
+    <footer>
+        <p><a href="/">Retour à l'accueil</a></p>
+    </footer>
+</body>
+</html>

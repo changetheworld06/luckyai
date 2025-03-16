@@ -100,6 +100,38 @@ def generate_grille_euromillions():
         "etoiles": etoiles
     })
 
+@app.route('/blog/strategie-gains-loterie')
+def strategie_gains_loterie():
+    return render_template("articles/strategie-gains-loterie.html")
+
+@app.route('/blog/psychologie-et-argent')
+def psychologie_et_argent():
+    return render_template("articles/psychologie-et-argent.html")
+
+@app.route('/blog/ia-et-probabilites')
+def ia_et_probabilites():
+    return render_template("articles/ia-et-probabilites.html")
+
+@app.route('/blog/optimiser-chances-loto')
+def optimiser_chances_loto():
+    return render_template("articles/optimiser-chances-loto.html")
+
+@app.route('/blog/<slug>')
+def article(slug):
+    return render_template(f"articles/{slug}.html")
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+@app.route('/contact')
+def contact():
+    return render_template("contact.html")
+
+@app.route('/blog')
+def blog():
+    return render_template("blog.html")
+
 # ✅ Routes légales et confidentialité
 @app.route('/mentions-legales')
 def mentions_legales():
