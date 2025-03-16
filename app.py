@@ -100,6 +100,10 @@ def generate_grille_euromillions():
         "etoiles": etoiles
     })
 
+@app.route('/blog/ia-et-loto')
+def ia_et_loto():
+    return render_template("articles/ia_loto.html")
+
 @app.route('/blog/strategie-gains-loterie')
 def strategie_gains_loterie():
     return render_template("articles/strategie-gains-loterie.html")
