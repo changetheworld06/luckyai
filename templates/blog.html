@@ -8,29 +8,77 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+
     <header>
         <h1>Blog - LuckyAI</h1>
     </header>
-    
-    <section>
-        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" alt="Illustration technologique" style="width:100%; max-height:300px; object-fit:cover;">
-        <p style="text-align:center; font-size:0.8em;">
-            <a href="https://fr.freepik.com/photos-gratuite/arriere-plan-technologique-tactile-remake-moderne-creation-adam_17851045.htm">Image de rawpixel.com sur Freepik</a>
-        </p>
+
+    <!-- 🖼️ Image de bannière -->
+    <section class="blog-banner">
+        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" 
+             alt="Illustration IA et Loto" 
+             style="width:100%; max-height:300px; object-fit:cover;">
+             <a href="https://fr.freepik.com/photos-gratuite/arriere-plan-technologique-tactile-remake-moderne-creation-adam_17851045.htm">Image de rawpixel.com sur Freepik</a>
     </section>
-    
-    <section>
+
+    <section class="blog-container">
         <h2>Nos derniers articles</h2>
-        <ul>
-            <li><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></li>
-            <li><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></li>
-            <li><a href="{{ url_for('article', slug='psychologie-et-argent') }}">La psychologie de l’argent : Comment nos émotions influencent nos décisions financières</a></li>
-            <li><a href="{{ url_for('article', slug='strategie-gains-loterie') }}">Que faire si vous gagnez à la loterie ? Stratégies pour bien gérer vos gains</a></li>
-            <li><a href="{{ url_for('ia_et_loto') }}">L’IA peut-elle vraiment vous aider à gagner au Loto ?</a></li>
-        </ul>
+
+        <!-- 📌 Article 1 -->
+        <div class="blog-card">
+            <img src="{{ url_for('static', filename='images/strategie_loto.jpg') }}" alt="Optimiser ses chances au Loto">
+            <div class="blog-content">
+                <h3><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></h3>
+                <p>Découvrez des stratégies pour éviter les erreurs courantes et optimiser vos grilles.</p>
+                <a class="read-more" href="{{ url_for('article', slug='optimiser-chances-loto') }}">Lire l'article ➝</a>
+            </div>
+        </div>
+
+        <!-- 📌 Article 2 -->
+        <div class="blog-card">
+            <img src="{{ url_for('static', filename='images/ia_loto.jpg') }}" alt="IA et probabilités">
+            <div class="blog-content">
+                <h3><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></h3>
+                <p>Analyse de l'impact de l'IA sur les tirages du Loto et l'EuroMillions.</p>
+                <a class="read-more" href="{{ url_for('article', slug='ia-et-probabilites') }}">Lire l'article ➝</a>
+            </div>
+        </div>
+
+        <!-- 📌 Article 3 -->
+        <div class="blog-card">
+            <img src="{{ url_for('static', filename='images/psychologie_argent.jpg') }}" alt="Psychologie et argent">
+            <div class="blog-content">
+                <h3><a href="{{ url_for('article', slug='psychologie-et-argent') }}">La psychologie de l’argent : Comment nos émotions influencent nos décisions</a></h3>
+                <p>Comprendre les biais cognitifs pour mieux gérer son argent.</p>
+                <a class="read-more" href="{{ url_for('article', slug='psychologie-et-argent') }}">Lire l'article ➝</a>
+            </div>
+        </div>
+
+        <!-- 📌 Article 4 -->
+        <div class="blog-card">
+            <img src="{{ url_for('static', filename='images/strategie_gains.jpg') }}" alt="Stratégies de gains Loterie">
+            <div class="blog-content">
+                <h3><a href="{{ url_for('article', slug='strategie-gains-loterie') }}">Que faire si vous gagnez à la loterie ?</a></h3>
+                <p>Conseils pour bien gérer son argent après un gain important.</p>
+                <a class="read-more" href="{{ url_for('article', slug='strategie-gains-loterie') }}">Lire l'article ➝</a>
+            </div>
+        </div>
+
+        <!-- 📌 Article 5 -->
+        <div class="blog-card">
+            <img src="{{ url_for('static', filename='images/ia_loto_help.jpg') }}" alt="IA et Loto">
+            <div class="blog-content">
+                <h3><a href="{{ url_for('ia_et_loto') }}">L’IA peut-elle vraiment vous aider à gagner au Loto ?</a></h3>
+                <p>Découvrez les limites et opportunités de l'IA dans la prédiction des numéros gagnants.</p>
+                <a class="read-more" href="{{ url_for('ia_et_loto') }}">Lire l'article ➝</a>
+            </div>
+        </div>
+
     </section>
+
     <footer>
-        <p><a href="/">Retour à l'accueil</a></p>
+        <p><a href="/">⬅ Retour à l'accueil</a></p>
     </footer>
+
 </body>
 </html>
