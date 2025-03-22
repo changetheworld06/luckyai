@@ -273,3 +273,82 @@ a {
 .btn:hover {
     background-color: #e64a19;
 }
+
+.blog-card.compact {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.blog-card.compact img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.blog-content h3 {
+  font-size: 1em;
+  margin: 0 0 5px 0;
+}
+
+.blog-content p {
+  margin: 0;
+  font-size: 0.85em;
+  color: #555;
+}
+
+.blog-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.blog-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.blog-card {
+    display: flex;
+    gap: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.blog-card:hover {
+    transform: translateY(-3px);
+}
+
+.blog-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.blog-content {
+    flex: 1;
+}
+
+.blog-content h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.blog-content p {
+    font-size: 0.9em;
+    color: #666;
+}

@@ -23,30 +23,28 @@
 
     <section class="blog-container">
         <h2>Nos derniers articles</h2>
-
-        <!-- 📌 Article 1 -->
-        <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/strategie_loto.jpg') }}" alt="Optimiser ses chances au Loto">
-            <div class="blog-content">
-                <h3><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></h3>
-                <p>Découvrez des stratégies pour éviter les erreurs courantes et optimiser vos grilles.</p>
-                <a class="read-more" href="{{ url_for('article', slug='optimiser-chances-loto') }}">Lire l'article ➝</a>
+        
+        <div class="blog-grid">
+    
+            <div class="blog-card">
+                <img src="{{ url_for('static', filename='images/optimiser-chances-loto.png') }}" alt="Optimiser ses chances">
+                <div class="blog-content">
+                    <h3><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></h3>
+                    <p>Découvrez des stratégies et conseils pour optimiser vos grilles et éviter les erreurs les plus courantes.</p>
+                </div>
             </div>
-        </div>
-
-        <!-- 📌 Article 2 -->
-        <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/ia_loto.jpg') }}" alt="IA et probabilités">
-            <div class="blog-content">
-                <h3><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></h3>
-                <p>Analyse de l'impact de l'IA sur les tirages du Loto et l'EuroMillions.</p>
-                <a class="read-more" href="{{ url_for('article', slug='ia-et-probabilites') }}">Lire l'article ➝</a>
+    
+            <div class="blog-card">
+                <img src="{{ url_for('static', filename='images/ia-et-probabilites.png') }}" alt="IA et hasard">
+                <div class="blog-content">
+                    <h3><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></h3>
+                    <p>L’intelligence artificielle peut-elle vraiment détecter des schémas dans des jeux purement aléatoires ?</p>
+                </div>
             </div>
-        </div>
 
         <!-- 📌 Article 3 -->
         <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/psychologie_argent.jpg') }}" alt="Psychologie et argent">
+            <img src="{{ url_for('static', filename='images/psychologie_argent.png') }}" alt="Psychologie de l'argent">
             <div class="blog-content">
                 <h3><a href="{{ url_for('article', slug='psychologie-et-argent') }}">La psychologie de l’argent : Comment nos émotions influencent nos décisions</a></h3>
                 <p>Comprendre les biais cognitifs pour mieux gérer son argent.</p>
@@ -56,7 +54,7 @@
 
         <!-- 📌 Article 4 -->
         <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/strategie_gains.jpg') }}" alt="Stratégies de gains Loterie">
+            <img src="{{ url_for('static', filename='images/strategie_gains.png') }}" alt="Stratégie gains">
             <div class="blog-content">
                 <h3><a href="{{ url_for('article', slug='strategie-gains-loterie') }}">Que faire si vous gagnez à la loterie ?</a></h3>
                 <p>Conseils pour bien gérer son argent après un gain important.</p>
@@ -66,7 +64,7 @@
 
         <!-- 📌 Article 5 -->
         <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/ia_loto_help.jpg') }}" alt="IA et Loto">
+            <img src="{{ url_for('static', filename='images/ia_loto_help.png') }}" alt="IA Loto">
             <div class="blog-content">
                 <h3><a href="{{ url_for('ia_et_loto') }}">L’IA peut-elle vraiment vous aider à gagner au Loto ?</a></h3>
                 <p>Découvrez les limites et opportunités de l'IA dans la prédiction des numéros gagnants.</p>
