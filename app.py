@@ -149,6 +149,10 @@ def cgv():
 def confidentialite():
     return render_template("confidentialite.html")
 
+@app.route("/blog/entrainer-la-chance")
+def entrainer_la_chance():
+    return render_template("articles/entrainer-la-chance.html")
+
 # ✅ Lancer l'application Flask
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))

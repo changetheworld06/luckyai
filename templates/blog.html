@@ -25,6 +25,14 @@
         <h2>Nos derniers articles</h2>
         
         <div class="blog-grid">
+
+            <div class="blog-card">
+                <img src="{{ url_for('static', filename='images/entrainer-la-chance.png') }}" alt="Entraîner la chance">
+                <div class="blog-content">
+                    <h3><a href="{{ url_for('article', slug='entrainer-la-chance') }}">Entraîner la chance : Peut-on influencer le hasard ?</a></h3>
+                    <p>Découvrez comment l’attitude mentale, la préparation et les outils d’analyse peuvent jouer un rôle dans ce que l’on appelle la “chance”.</p>
+                </div>
+            </div>
     
             <div class="blog-card">
                 <img src="{{ url_for('static', filename='images/optimiser-chances-loto.png') }}" alt="Optimiser ses chances">
