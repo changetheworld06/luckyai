@@ -21,14 +21,13 @@ Session(app)
 @app.after_request
 def add_security_headers(response):
     response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagservices.com; "
-        "img-src 'self' data: https://*.googlesyndication.com; "
-        "style-src 'self' 'unsafe-inline'; "
-        "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; "
+        "default-src 'self' https://*.googlesyndication.com https://*.google-analytics.com; "
+        "img-src 'self' data: https://*.googleusercontent.com https://*.googlesyndication.com; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://www.googletagservices.com https://www.google-analytics.com https://adservice.google.com; "
+        "frame-src https://*.googlesyndication.com; "
         "connect-src 'self';"
     )
-    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "no-referrer"
