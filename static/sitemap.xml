@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://www.luckyai.fr/</loc>
-        <lastmod>2025-03-12</lastmod>
-        <priority>1.0</priority>
-    </url>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.luckyai.fr/</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/about</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/contact</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/mentions-legales</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/cgv</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/confidentialite</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/entrainer-la-chance</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/optimiser-chances-loto</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/ia-et-probabilites</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/psychologie-et-argent</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/strategie-gains-loterie</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.luckyai.fr/blog/ia-et-loto</loc>
+  <lastmod>2025-04-13T15:52:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
 </urlset>
