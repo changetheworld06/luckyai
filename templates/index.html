@@ -1,14 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-VGN26YL2RJ');
-</script>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,8 +53,42 @@
                 <li><a href="{{ url_for('blog') }}">Blog</a></li>
             </ul>
         </nav>
-    <script data-goatcounter="https://luckyai.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+        <style>
+#cookie-banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(34, 34, 34, 0.95); /* fond sombre avec transparence */
+  color: #fff;
+  padding: 30px;
+  text-align: center;
+  z-index: 9999;
+  font-size: 1em;
+  border-radius: 8px;
+  max-width: 90%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+            #cookie-banner button {
+              margin-left: 10px;
+              padding: 8px 15px;
+              border: none;
+              cursor: pointer;
+              font-weight: bold;
+            }
+            #acceptCookies { background-color: #4CAF50; color: white; }
+            #declineCookies {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #555;
+  opacity: 0.6;
+}
+#declineCookies:hover {
+  opacity: 1;
+  color: #fff;
+  border-color: #888;
+}
+            </style>
     </head>
 <body>
 
@@ -196,6 +221,65 @@
             generateGrille("euromillions");
         });
     </script>
+<div id="cookie-banner" style="display: none;">
+    Ce site utilise des cookies pour améliorer l’expérience utilisateur (ex. : Google Analytics).
+    <button id="acceptCookies">Accepter</button>
+    <button id="declineCookies">Refuser</button>
+  </div>
 
+  <script>
+    function setCookie(name, value, days) {
+        let expires = "";
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function getCookie(name) {
+        return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+    }
+    
+    window.addEventListener('DOMContentLoaded', function () {
+        const banner = document.getElementById("cookie-banner");
+        const consent = getCookie("cookieConsent");
+    
+        if (!consent) {
+            banner.style.display = "block";
+        }
+    
+        document.getElementById("acceptCookies").addEventListener("click", function () {
+            setCookie("cookieConsent", "true", 365);
+            banner.style.display = "none";
+            loadTrackingScripts();
+        });
+    
+        document.getElementById("declineCookies").addEventListener("click", function () {
+            setCookie("cookieConsent", "false", 365);
+            banner.style.display = "none";
+        });
+    
+        if (consent === "true") {
+            loadTrackingScripts();
+        }
+    });
+    
+    function loadTrackingScripts() {
+        // Google Analytics
+        const gtagScript = document.createElement('script');
+        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
+        gtagScript.async = true;
+        document.head.appendChild(gtagScript);
+
+        gtagScript.onload = () => {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ dataLayer.push(arguments); }
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-VGN26YL2RJ');
+        };
+    }
+  </script>
 </body>
 </html>

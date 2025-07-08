@@ -352,3 +352,27 @@ a {
     font-size: 0.9em;
     color: #666;
 }
+
+<style>
+#cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  z-index: 9999;
+  font-size: 0.9em;
+}
+#cookie-banner button {
+  margin-left: 10px;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+#acceptCookies { background-color: #4CAF50; color: white; }
+#declineCookies { background-color: #f44336; color: white; }
+</style>
