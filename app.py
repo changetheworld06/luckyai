@@ -54,11 +54,11 @@ app.include_router(loto_router, prefix="/api/loto", tags=["loto"])
 app.include_router(euromillions_router, prefix="/api/euromillions", tags=["euromillions"])
 app.include_router(paywall_router, prefix="/api", tags=["paywall"])
 
-
+# Servir l'index.html à la racine "/"
 @app.get("/")
-def root():
-    return {"message": "LuckyAI backend OK"}
-
+def serve_frontend():
+    index_path = os.path.join("frontend", "index.html")
+    return FileResponse(index_path)
 
 if __name__ == "__main__":
     import uvicorn
