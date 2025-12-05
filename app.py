@@ -9,6 +9,8 @@ from datetime import datetime
 from api.loto import router as loto_router
 from api.euromillions import router as euromillions_router
 from api.paywall import router as paywall_router
+from pathlib import Path
+from fastapi.responses import FileResponse
 
 # 🔁 Charge le .env
 load_dotenv()
@@ -23,6 +25,19 @@ app = FastAPI(
     description="API de génération de grilles optimisées Loto / Euromillions",
     version="0.1.0",
 )
+
+# Juste après `app = FastAPI()` et la config Stripe / CORS par exemple
+BASE_DIR = Path(__file__).resolve().parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+
+
+@app.get("/")
+async def serve_frontend():
+    index_path = FRONTEND_DIR / "index.html"
+    if not index_path.is_file():
+        # aide au debug si jamais le chemin est faux
+        return {"error": "index.html introuvable", "path": str(index_path)}
+    return FileResponse(str(index_path))
 
 @app.get("/sitemap.xml", response_class=Response)
 def sitemap():
@@ -53,12 +68,6 @@ app.add_middleware(
 app.include_router(loto_router, prefix="/api/loto", tags=["loto"])
 app.include_router(euromillions_router, prefix="/api/euromillions", tags=["euromillions"])
 app.include_router(paywall_router, prefix="/api", tags=["paywall"])
-
-# Servir l'index.html à la racine "/"
-@app.get("/")
-def serve_frontend():
-    index_path = os.path.join("frontend", "index.html")
-    return FileResponse(index_path)
 
 if __name__ == "__main__":
     import uvicorn
