@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LuckyAI – Générateur de grilles Loto & Euromillions optimisées</title>
+    <meta name="description" content="LuckyAI analyse les tirages historiques réels du Loto et de l’Euromillions pour générer des grilles optimisées grâce à l’intelligence statistique. Aucun résultat garanti, uniquement de la data.">
+    <meta name="keywords" content="Loto, Euromillions, tirages, intelligence artificielle, statistiques, algorithme, générateur numéros, LuckyAI">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="LuckyAI">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.luckyai.fr">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://www.luckyai.fr/static/favicon.ico" />
+    <link rel="shortcut icon" href="https://www.luckyai.fr/static/favicon.ico" />
+    <link rel="apple-touch-icon" href="https://www.luckyai.fr/static/apple-touch-icon.png" />
+
+    <!-- Open Graph (Facebook / LinkedIn) -->
+    <meta property="og:title" content="LuckyAI – Boostez vos chances au Loto avec la data" />
+    <meta property="og:description" content="LuckyAI analyse les anciens tirages du Loto et de l’Euromillions pour générer des numéros optimisés grâce à l’intelligence statistique." />
+    <meta property="og:image" content="https://www.luckyai.fr/static/logo.png" />
+    <meta property="og:url" content="https://www.luckyai.fr" />
+    <meta property="og:type" content="website" />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="fr" href="https://www.luckyai.fr/" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LuckyAI – IA pour optimiser vos grilles de Loto" />
+    <meta name="twitter:description" content="LuckyAI génère des numéros optimisés en analysant les tirages historiques du Loto et de l’Euromillions." />
+    <meta name="twitter:image" content="https://www.luckyai.fr/static/logo.png" />
+
+    <!-- Schema.org JSON-LD -->
+    <!-- Schema.org Service -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "LuckyAI – Générateur de grilles Loto & Euromillions",
+        "description": "LuckyAI analyse les tirages historiques du Loto et de l’Euromillions et génère des grilles pondérées selon des critères statistiques.",
+        "provider": {
+          "@type": "Organization",
+          "name": "LuckyAI",
+          "url": "https://www.luckyai.fr"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "France"
+        },
+        "serviceType": "Outil d'analyse statistique pour grilles de jeux de hasard"
+      }
+      </script>
+
+    <!-- Google Analytics + AdSense (chargés après consentement) -->
+    <script>
+      function loadTrackingScripts() {
+          // Google Analytics (GA4)
+          const gtagScript = document.createElement("script");
+          gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
+          gtagScript.async = true;
+          document.head.appendChild(gtagScript);
+
+          gtagScript.onload = () => {
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){ dataLayer.push(arguments); }
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', 'G-VGN26YL2RJ');
+          };
+
+          // Google AdSense
+          const adsScript = document.createElement("script");
+          adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476";
+          adsScript.async = true;
+          adsScript.crossOrigin = "anonymous";
+          document.head.appendChild(adsScript);
+      }
+  </script>
+
+  <!-- Stripe -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+</head>
+
+  <style>
+    :root {
+      --bg: #050816;
+      --card-bg: #0b1020;
+      --accent: #4f46e5;
+      --accent-soft: #6366f1;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --danger: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: conic-gradient(from 180deg, #4f46e5, #8b5cf6, #ec4899, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.7);
+    }
+
+    .logo-icon span {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #f9fafb;
+    }
+
+    .logo-text {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.9rem, 4vw, 2.3rem);
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+      border-radius: 1.25rem;
+      padding: 1.5rem 1.4rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.8) inset;
+    }
+
+    .card h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0 0 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      font: inherit;
+      border-radius: 999px;
+      border: none;
+      padding: 0.65rem 1.2rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(120deg, #4f46e5, #8b5cf6);
+      color: #f9fafb;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 28px rgba(79, 70, 229, 0.8);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .btn-primary span.icon,
+    .btn-secondary span.icon {
+      font-size: 1.1rem;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.15);
+      color: #6ee7b7;
+      font-size: 0.8rem;
+    }
+
+    .status-pill span.icon {
+      font-size: 0.9rem;
+    }
+
+    .status-text {
+      text-align: right;
+      font-style: italic;
+    }
+
+    .results {
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.75rem;
+      max-height: 420px;
+      overflow: auto;
+      padding-right: 0.2rem;
+    }
+
+    .grid-card {
+      background: radial-gradient(circle at top right, #0f172a 0, #020617 55%);
+      border-radius: 0.9rem;
+      padding: 0.85rem 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .grid-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .grid-index {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .grid-tag {
+      font-size: 0.75rem;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    .numbers-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .ball {
+      min-width: 28px;
+      height: 28px;
+      padding: 0 0.45rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 500;
+      background: radial-gradient(circle at 30% 30%, #f9fafb 0, #d1d5db 55%, #9ca3af 100%);
+      color: #111827;
+      box-shadow: 0 0 10px rgba(15, 23, 42, 0.9);
+    }
+
+    .ball.special {
+      background: radial-gradient(circle at 30% 30%, #f97316 0, #ea580c 50%, #b91c1c 100%);
+      color: #f9fafb;
+      box-shadow: 0 0 14px rgba(248, 113, 113, 0.9);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.35), transparent);
+      margin: 0.35rem 0;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .grid-explanation {
+      margin-top: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .grid-explanation strong {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    .score-badge {
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.18);
+      color: #bbf7d0;
+      font-weight: 500;
+    }
+
+    .right-card-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .right-card-list li::before {
+      content: "•";
+      color: var(--accent-soft);
+      margin-right: 0.4rem;
+    }
+
+    .footer {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .grid-card.locked {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-card.locked .lock-blur {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .grid-card.locked::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.75),
+        rgba(15, 23, 42, 0.95)
+      );
+      pointer-events: none;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+      text-align: center;
+      padding: 0.75rem;
+    }
+
+    .lock-overlay-text {
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      margin-bottom: 0.5rem;
+    }
+
+    .lock-overlay-price {
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.7rem;
+      color: #fbbf24;
+    }
+
+    .lock-overlay button {
+      font: inherit;
+      border-radius: 999px;
+      border: none;
+      padding: 0.45rem 1.2rem;
+      cursor: pointer;
+      background: linear-gradient(120deg, #f97316, #ec4899);
+      color: #f9fafb;
+      box-shadow: 0 0 18px rgba(248, 113, 113, 0.7);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    .lock-overlay button span.icon {
+      font-size: 1rem;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      left: 50%;
+      bottom: 1rem;
+      transform: translateX(-50%);
+      max-width: 540px;
+      width: calc(100% - 2rem);
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+      display: none; /* par défaut caché */
+      z-index: 50;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .cookie-banner.visible {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .cookie-text {
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex: 1 1 60%;
+      min-width: 200px;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex: 0 0 auto;
+      justify-content: flex-end;
+    }
+
+    .cookie-btn {
+      font: inherit;
+      border-radius: 999px;
+      border: none;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .cookie-btn.primary {
+      background: linear-gradient(120deg, #4f46e5, #8b5cf6);
+      color: #f9fafb;
+    }
+
+    .cookie-btn.secondary {
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--muted);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <span>LAI</span>
+        </div>
+        <div class="logo-text">LuckyAI · beta</div>
+      </div>
+      <h1>Génère des grilles Loto & Euromillions optimisées par la data</h1>
+      <p class="subtitle">
+        Les tirages FDJ sont analysés par un moteur statistique. LuckyAI génère ensuite
+        des grilles variées et pondérées. Aucune promesse de gain, uniquement de la data.
+      </p>
+    </header>
+
+    <section class="grid">
+      <!-- Colonne gauche : actions + résultats -->
+      <div class="card">
+        <h2>Génération des grilles</h2>
+        <p>
+          Choisis ton jeu, LuckyAI appelle l’API backend et affiche 10 grilles optimisées
+          en quelques secondes.
+        </p>
+
+        <div class="btn-row">
+          <button class="btn-primary" id="btn-loto">
+            <span class="icon">🎰</span>
+            <span>Générer 10 grilles Loto</span>
+          </button>
+          <button class="btn-secondary" id="btn-euromillions">
+            <span class="icon">💫</span>
+            <span>Générer 10 grilles Euromillions</span>
+          </button>
+        </div>
+
+        <div class="status">
+          <div class="status-pill" id="status-pill">
+            <span class="icon" id="status-icon">🟢</span>
+            <span id="status-label">Prêt à générer</span>
+          </div>
+          <div class="status-text" id="status-text">
+            Backend attendu sur <code>http://localhost:8000</code>
+          </div>
+        </div>
+
+        <div id="results-title" style="font-size:0.85rem;color:var(--muted);margin-top:0.2rem;">
+          Aucune grille générée pour l'instant.
+        </div>
+
+        <div id="results" class="results-box"></div>
+      </div>
+
+      <!-- Colonne droite : explication -->
+      <aside class="card">
+        <h2>Comment ça marche&nbsp;?</h2>
+      
+        <p>
+          LuckyAI ne prédit pas les résultats du Loto ou de l’Euromillions. 
+          Le moteur analyse simplement les <strong>tirages historiques réels</strong> pour attribuer 
+          un score statistique à chaque numéro, puis génère des grilles en utilisant ces pondérations. 
+          Voici précisément ce que fait l’algorithme.
+        </p>
+      
+        <h3>1. Analyse des tirages historiques</h3>
+        <p>
+          LuckyAI charge l’intégralité de l’historique des tirages :
+        </p>
+        <ul class="right-card-list">
+          <li><strong>Loto :</strong> 2 686 tirages analysés</li>
+          <li><strong>Euromillions :</strong> 1 549 tirages analysés</li>
+        </ul>
+        <p>
+          Pour chaque numéro, le moteur calcule :
+        </p>
+        <ul class="right-card-list">
+          <li>sa <strong>fréquence d’apparition</strong> (combien de fois il est sorti),</li>
+          <li>son <strong>retard</strong> (nombre de tirages depuis sa dernière apparition).</li>
+        </ul>
+      
+        <h3>2. Attribution d’un score individuel</h3>
+        <p>
+          Chaque numéro reçoit ensuite un score mathématique (entre 0 et 1) basé uniquement sur :
+        </p>
+        <ul class="right-card-list">
+          <li>sa fréquence normalisée,</li>
+          <li>son retard normalisé.</li>
+        </ul>
+        <p>
+          Un numéro très fréquent ou longtemps en retard obtient un score plus élevé. 
+          Un numéro rarement sorti mais pas en retard obtient un score plus faible.
+        </p>
+      
+        <h3>3. Génération pondérée des grilles</h3>
+        <p>
+          Pour chaque grille demandée, LuckyAI tire les numéros <strong>avec une probabilité 
+          proportionnelle à leur score</strong>.  
+          Cela signifie que :
+        </p>
+        <ul class="right-card-list">
+          <li>les numéros bien notés ont plus de chances d’être sélectionnés,</li>
+          <li>les numéros faibles peuvent toujours apparaître (rien n’est exclu).</li>
+        </ul>
+      
+        <h3>4. Calcul du score d’une grille</h3>
+        <p>
+          Une fois la grille générée, le modèle calcule une note globale 0–100 en combinant :
+        </p>
+        <ul class="right-card-list">
+          <li>la moyenne des scores individuels,</li>
+          <li>une pondération 70 % numéros principaux / 30 % étoiles,</li>
+          <li>une transformation mathématique qui étire la note pour mieux exploiter l’échelle 0–100.</li>
+        </ul>
+      
+        <h3>5. Explication de la note</h3>
+        <p>
+          LuckyAI fournit aussi une analyse de la grille :
+        </p>
+        <ul class="right-card-list">
+          <li>proportion de numéros “forts”,</li>
+          <li>proportion de numéros “exploratoires”,</li>
+          <li>moyenne des scores des numéros et des étoiles,</li>
+          <li>raison générale pour laquelle la grille reçoit cette note.</li>
+        </ul>
+      
+        <h3>Important</h3>
+        <p>
+          LuckyAI n’est pas un outil de prédiction.  
+          Il s’agit uniquement d’une <strong>analyse statistique</strong> basée sur des tirages passés.  
+          Les jeux d'argent dépendent du hasard et aucun résultat ne peut être garanti.
+        </p>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      LuckyAI ne garantit aucun gain. Jeu réservé aux adultes, jouez avec modération.
+    </footer>
+  </main>
+
+  <script>
+    // Config API + Stripe
+    const API_BASE = "http://localhost:8000";
+    const STRIPE_PUBLISHABLE_KEY = "pk_test_51Sb5La2zIiwCh1duvrBhrQ1f0WDzaV0fcceB2SPsIO5GPOlMj4rsft8j6SbAYi5Gh51lL5UNyAjpyqkOqeZpIhL700DKTg7VX0"; // ta clé publishable TEST
+    const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
+  
+    // ===== Gestion consentement cookies =====
+    function getCookieConsent() {
+      return localStorage.getItem("luckyai_cookie_consent"); // "accepted" | "rejected" | null
+    }
+  
+    function setCookieConsent(value) {
+      localStorage.setItem("luckyai_cookie_consent", value); // "accepted" ou "rejected"
+    }
+  
+    function initCookieBanner() {
+      const banner = document.getElementById("cookie-banner");
+      const btnAccept = document.getElementById("cookie-accept");
+      const btnReject = document.getElementById("cookie-reject");
+  
+      if (!banner || !btnAccept || !btnReject) return;
+  
+      const current = getCookieConsent();
+  
+      if (current === "accepted") {
+        // Consentement déjà donné → on charge Analytics/AdSense
+        loadTrackingScripts();
+        return; // pas de bandeau
+      }
+  
+      if (current === "rejected") {
+        // Consentement refusé → pas de scripts, pas de bandeau
+        return;
+      }
+  
+      // Sinon : pas encore de choix → afficher le bandeau
+      banner.classList.add("visible");
+  
+      btnAccept.addEventListener("click", () => {
+        setCookieConsent("accepted");
+        banner.classList.remove("visible");
+        loadTrackingScripts(); // on démarre GA + AdSense
+      });
+  
+      btnReject.addEventListener("click", () => {
+        setCookieConsent("rejected");
+        banner.classList.remove("visible");
+        // pas de scripts Analytics/Adsense
+      });
+    }
+      // ===== Google Analytics (G-VGN26YL2RJ) =====
+  function loadTrackingScripts() {
+    // Google Analytics
+    const gtagScript = document.createElement("script");
+    gtagScript.src =
+      "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
+    gtagScript.async = true;
+    document.head.appendChild(gtagScript);
+
+    gtagScript.onload = () => {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag("js", new Date());
+      gtag("config", "G-VGN26YL2RJ");
+    };
+  }
+
+    // Références DOM
+    const btnLoto = document.getElementById("btn-loto");
+  const btnEuromillions = document.getElementById("btn-euromillions");
+  const resultsEl = document.getElementById("results");
+  const resultsTitleEl = document.getElementById("results-title");
+  const statusPill = document.getElementById("status-pill");
+  const statusLabel = document.getElementById("status-label");
+  const statusText = document.getElementById("status-text");
+  const statusIcon = document.getElementById("status-icon");
+
+  // ==========
+  // 1. Gestion du retour Stripe : si ?premium=1, on affiche la grille débloquée
+  // ==========
+
+  function showUnlockedGridIfAny() {
+    const params = new URLSearchParams(window.location.search);
+    const premium = params.get("premium");
+    if (premium !== "1") return;
+
+    const raw = localStorage.getItem("luckyai_pending_grid");
+    if (!raw) return;
+
+    let payload;
+    try {
+      payload = JSON.parse(raw); // { game, grid }
+    } catch (e) {
+      console.error("Impossible de parser la grille débloquée :", e);
+      return;
+    }
+
+    // Nettoyage du pending + du param dans l'URL
+    localStorage.removeItem("luckyai_pending_grid");
+    params.delete("premium");
+    const newUrl =
+      window.location.pathname +
+      (params.toString() ? "?" + params.toString() : "");
+    history.replaceState({}, "", newUrl);
+
+    // On affiche la grille débloquée seule
+    renderUnlockedGrid(payload.game, payload.grid);
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+  initCookieBanner();       // gère le bandeau + consentement
+  showUnlockedGridIfAny();  // logique Stripe / grille débloquée
+});
+
+  // ==========
+  // 2. Appel API pour générer les grilles
+  // ==========
+
+  async function generate(game) {
+    let endpoint;
+    if (game === "loto") {
+      endpoint = "/api/loto/generate";
+    } else if (game === "euromillions") {
+      endpoint = "/api/euromillions/generate";
+    } else {
+      return;
+    }
+
+    setLoading(true, game);
+
+    try {
+      const res = await fetch(API_BASE + endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: "{}", // POST sans payload spécifique
+      });
+
+      if (!res.ok) {
+        throw new Error("Erreur API : " + res.status);
+      }
+
+      const data = await res.json();
+      renderGrids(data); // affichage normal avec floutage
+      setSuccess("Grilles " + data.game + " générées");
+    } catch (err) {
+      console.error(err);
+      setError("Impossible de joindre le backend. Est-il lancé sur 8000 ?");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // ==========
+  // 3. Explication de la grille (inchangé)
+  // ==========
+
+  function explainGrid(score, game, details) {
+    if (typeof score !== "number") {
+      return "Grille générée par LuckyAI sur la base des tirages historiques.";
+    }
+
+    const gameLabel = game === "euromillions" ? "Euromillions" : "Loto";
+
+    const avgMain = details?.avg_main ?? null;
+    const avgSpecials = details?.avg_specials ?? null;
+    const highMain = details?.high_main_count ?? 0;
+    const highSpecials = details?.high_specials_count ?? 0;
+    const lowMain = details?.low_main_count ?? 0;
+    const lowSpecials = details?.low_specials_count ?? 0;
+
+    const totalHigh = highMain + highSpecials;
+    const totalLow = lowMain + lowSpecials;
+
+    let base;
+    if (score >= 70) {
+      base = `Cette grille est <strong>très bien notée</strong> par le modèle LuckyAI pour le ${gameLabel}.`;
+    } else if (score >= 60) {
+      base = `Cette grille est <strong>bien notée</strong> par LuckyAI pour le ${gameLabel}.`;
+    } else if (score >= 50) {
+      base = `Cette grille est <strong>dans la moyenne</strong> selon le modèle.`;
+    } else {
+      base = `Cette grille est <strong>plutôt exploratoire</strong> selon LuckyAI.`;
+    }
+
+    const parts = [base];
+
+    if (totalHigh >= 3) {
+      parts.push(
+        `Elle contient plusieurs numéros avec un <strong>score individuel élevé</strong> dans l'historique des tirages (combinaisons jugées favorables par l'algorithme).`
+      );
+    } else if (totalHigh >= 1) {
+      parts.push(
+        `Elle intègre au moins un numéro avec un <strong>score individuel élevé</strong> d'après les tirages passés.`
+      );
+    }
+
+    if (totalLow >= 2) {
+      parts.push(
+        `La grille inclut aussi quelques numéros plus <strong>exploratoires</strong>, qui sont moins privilégiés par le modèle mais apportent de la diversité.`
+      );
+    }
+
+    if (avgMain !== null || avgSpecials !== null) {
+      const avgMainText =
+        avgMain !== null
+          ? `principaux autour de ${(avgMain * 100).toFixed(0)}/100`
+          : null;
+      const avgSpecialsText =
+        avgSpecials !== null
+          ? `spéciaux autour de ${(avgSpecials * 100).toFixed(0)}/100`
+          : null;
+
+      const partsAvg = [];
+      if (avgMainText) partsAvg.push(avgMainText);
+      if (avgSpecialsText) partsAvg.push(avgSpecialsText);
+
+      if (partsAvg.length > 0) {
+        parts.push(
+          `En moyenne, les numéros de cette grille ont un score ${partsAvg.join(
+            " et "
+          )} selon le modèle interne de LuckyAI.`
+        );
+      }
+    }
+
+    parts.push(
+      `Comme toujours, il s'agit d'une <strong>analyse statistique</strong> à partir des tirages historiques, sans aucune garantie de gain.`
+    );
+
+    return parts.join(" ");
+  }
+
+  // ==========
+  // 4. Rendu des grilles "normales" (avec floutage pour les très bien notées)
+  // ==========
+
+  function renderGrids(data) {
+    const { game, grids } = data;
+
+    if (!Array.isArray(grids) || grids.length === 0) {
+      resultsEl.innerHTML = "";
+      resultsTitleEl.textContent = "Aucune grille reçue depuis l’API.";
+      return;
+    }
+
+    resultsEl.innerHTML = "";
+    resultsTitleEl.textContent = `Grilles générées pour : ${game.toUpperCase()} (${grids.length} au total)`;
+
+    grids.forEach((grid, index) => {
+      const card = document.createElement("div");
+      card.className = "grid-card";
+
+      const header = document.createElement("div");
+      header.className = "grid-card-header";
+
+      const indexEl = document.createElement("div");
+      indexEl.className = "grid-index";
+      indexEl.textContent = `Grille #${index + 1}`;
+
+      const tag = document.createElement("div");
+      tag.className = "grid-tag";
+      tag.textContent = game === "loto" ? "Loto" : "Euromillions";
+
+      header.appendChild(indexEl);
+      header.appendChild(tag);
+
+      const numbersRow = document.createElement("div");
+      numbersRow.className = "numbers-row";
+
+      (grid.main || []).forEach((n) => {
+        const ball = document.createElement("div");
+        ball.className = "ball";
+        ball.textContent = n;
+        numbersRow.appendChild(ball);
+      });
+
+      (grid.specials || []).forEach((n) => {
+        const ball = document.createElement("div");
+        ball.className = "ball special";
+        ball.textContent = n;
+        numbersRow.appendChild(ball);
+      });
+
+      const divider = document.createElement("div");
+      divider.className = "divider";
+
+      const scoreRow = document.createElement("div");
+      scoreRow.className = "score-row";
+
+      const leftScore = document.createElement("div");
+      const scoreValueNum =
+        typeof grid.score === "number" ? grid.score : null;
+      const scoreText =
+        scoreValueNum !== null ? `${scoreValueNum.toFixed(1)}/100` : "—";
+      leftScore.textContent = `Score : ${scoreText}`;
+
+      const rightScore = document.createElement("div");
+      rightScore.className = "score-badge";
+      rightScore.textContent = "Moteur LuckyAI v1.0";
+
+      scoreRow.appendChild(leftScore);
+      scoreRow.appendChild(rightScore);
+
+      const explanation = document.createElement("div");
+      explanation.className = "grid-explanation";
+      explanation.innerHTML = explainGrid(
+        scoreValueNum,
+        game,
+        grid.details || null
+      );
+
+      const isVeryHigh = scoreValueNum !== null && scoreValueNum >= 70;
+
+      if (isVeryHigh) {
+        // 🔒 Toujours flouter les très bien notées (pay-per-grid)
+        card.classList.add("locked");
+
+        const contentWrapper = document.createElement("div");
+        contentWrapper.className = "lock-blur";
+
+        contentWrapper.appendChild(header);
+        contentWrapper.appendChild(numbersRow);
+        contentWrapper.appendChild(divider);
+        contentWrapper.appendChild(scoreRow);
+        contentWrapper.appendChild(explanation);
+
+        card.appendChild(contentWrapper);
+
+        const overlay = document.createElement("div");
+        overlay.className = "lock-overlay";
+
+        const text = document.createElement("div");
+        text.className = "lock-overlay-text";
+        text.textContent =
+          "Cette grille est très bien notée par LuckyAI. Pour la voir en clair, il faut la débloquer.";
+
+        const price = document.createElement("div");
+        price.className = "lock-overlay-price";
+        price.textContent = "Déblocage : 0,50 € (une fois)";
+
+        const btn = document.createElement("button");
+        const icon = document.createElement("span");
+        icon.className = "icon";
+        icon.textContent = "🔓";
+        const label = document.createElement("span");
+        label.textContent = "Débloquer cette grille";
+
+        btn.appendChild(icon);
+        btn.appendChild(label);
+
+        // Ici : on passe le jeu + la grille à Stripe
+        btn.addEventListener("click", () => {
+          startPremiumCheckout(game, grid);
+        });
+
+        overlay.appendChild(text);
+        overlay.appendChild(price);
+        overlay.appendChild(btn);
+
+        card.appendChild(overlay);
+      } else {
+        // Grille normale non floutée
+        card.appendChild(header);
+        card.appendChild(numbersRow);
+        card.appendChild(divider);
+        card.appendChild(scoreRow);
+        card.appendChild(explanation);
+      }
+
+      resultsEl.appendChild(card);
+    });
+  }
+
+  // ==========
+  // 5. Afficher une grille débloquée seule (après paiement)
+  // ==========
+
+  function renderUnlockedGrid(game, grid) {
+    resultsEl.innerHTML = "";
+    resultsTitleEl.textContent = "Grille débloquée (accès unique)";
+
+    const card = document.createElement("div");
+    card.className = "grid-card";
+
+    const header = document.createElement("div");
+    header.className = "grid-card-header";
+
+    const indexEl = document.createElement("div");
+    indexEl.className = "grid-index";
+    indexEl.textContent = "Grille débloquée";
+
+    const tag = document.createElement("div");
+    tag.className = "grid-tag";
+    tag.textContent = game === "loto" ? "Loto" : "Euromillions";
+
+    header.appendChild(indexEl);
+    header.appendChild(tag);
+
+    const numbersRow = document.createElement("div");
+    numbersRow.className = "numbers-row";
+
+    (grid.main || []).forEach((n) => {
+      const ball = document.createElement("div");
+      ball.className = "ball";
+      ball.textContent = n;
+      numbersRow.appendChild(ball);
+    });
+
+    (grid.specials || []).forEach((n) => {
+      const ball = document.createElement("div");
+      ball.className = "ball special";
+      ball.textContent = n;
+      numbersRow.appendChild(ball);
+    });
+
+    const divider = document.createElement("div");
+    divider.className = "divider";
+
+    const scoreRow = document.createElement("div");
+    scoreRow.className = "score-row";
+
+    const leftScore = document.createElement("div");
+    const scoreValueNum =
+      typeof grid.score === "number" ? grid.score : null;
+    const scoreText =
+      scoreValueNum !== null ? `${scoreValueNum.toFixed(1)}/100` : "—";
+    leftScore.textContent = `Score : ${scoreText}`;
+
+    const rightScore = document.createElement("div");
+    rightScore.className = "score-badge";
+    rightScore.textContent = "Moteur LuckyAI v1.0";
+
+    scoreRow.appendChild(leftScore);
+    scoreRow.appendChild(rightScore);
+
+    const explanation = document.createElement("div");
+    explanation.className = "grid-explanation";
+    explanation.innerHTML = explainGrid(
+      scoreValueNum,
+      game,
+      grid.details || null
+    );
+
+    card.appendChild(header);
+    card.appendChild(numbersRow);
+    card.appendChild(divider);
+    card.appendChild(scoreRow);
+    card.appendChild(explanation);
+
+    resultsEl.appendChild(card);
+  }
+
+  // ==========
+  // 6. Gestion des états / boutons
+  // ==========
+
+  function setLoading(isLoading, game) {
+    if (isLoading) {
+      statusPill.style.background = "rgba(59,130,246,0.15)";
+      statusLabel.textContent =
+        game === "loto"
+          ? "Génération des grilles Loto..."
+          : "Génération des grilles Euromillions...";
+      statusIcon.textContent = "⏳";
+      statusText.textContent = "Requête en cours vers l’API FastAPI...";
+      btnLoto.disabled = true;
+      btnEuromillions.disabled = true;
+    } else {
+      btnLoto.disabled = false;
+      btnEuromillions.disabled = false;
+    }
+  }
+
+  function setSuccess(message) {
+    statusPill.style.background = "rgba(22,163,74,0.18)";
+    statusLabel.textContent = message;
+    statusIcon.textContent = "✅";
+    statusText.textContent = "Réponse OK depuis http://localhost:8000";
+  }
+
+  function setError(message) {
+    statusPill.style.background = "rgba(248,113,113,0.12)";
+    statusLabel.textContent = message;
+    statusIcon.textContent = "⚠️";
+    statusText.textContent =
+      "Vérifie que uvicorn tourne bien sur le port 8000.";
+  }
+
+  btnLoto.addEventListener("click", () => generate("loto"));
+  btnEuromillions.addEventListener("click", () => generate("euromillions"));
+
+  // ==========
+  // 7. Stripe : paiement pour UNE grille (pay-per-grid)
+  // ==========
+
+  async function startPremiumCheckout(game, grid) {
+    try {
+      // On stocke la grille à débloquer
+      localStorage.setItem(
+        "luckyai_pending_grid",
+        JSON.stringify({ game, grid })
+      );
+
+      const res = await fetch(`${API_BASE}/api/checkout/unlock`, {
+        method: "POST",
+      });
+
+      console.log("Réponse /api/checkout/unlock :", res.status);
+
+      if (!res.ok) {
+        alert("Impossible de démarrer le paiement (erreur backend).");
+        return;
+      }
+
+      const data = await res.json();
+      const sessionId = data.session_id;
+
+      const { error } = await stripeClient.redirectToCheckout({
+        sessionId: sessionId,
+      });
+
+      if (error) {
+        console.error(error);
+        alert("Erreur lors de la redirection vers Stripe.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Erreur réseau lors de l'appel au backend.");
+    }
+  }
+</script>
+  <!-- Bandeau cookies RGPD -->
+  <div id="cookie-banner" class="cookie-banner">
+    <div class="cookie-text">
+      LuckyAI utilise des cookies pour mesurer l’audience (Google Analytics) et afficher des publicités (AdSense).
+      Vous pouvez accepter ou refuser ces cookies facultatifs.
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-reject" class="cookie-btn secondary">Refuser</button>
+      <button id="cookie-accept" class="cookie-btn primary">Tout accepter</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+# app.py
+import os
+import stripe
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+from fastapi.responses import Response
+from datetime import datetime
+from api.loto import router as loto_router
+from api.euromillions import router as euromillions_router
+from api.paywall import router as paywall_router
+
+# 🔁 Charge le .env
+load_dotenv()
+
+# ⚙️ Config Stripe à partir du .env
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "")
+
+print("DEBUG Stripe secret loaded:", bool(stripe.api_key))
+
+app = FastAPI(
+    title="LuckyAI API",
+    description="API de génération de grilles optimisées Loto / Euromillions",
+    version="0.1.0",
+)
+
+@app.get("/sitemap.xml", response_class=Response)
+def sitemap():
+    # À adapter si tu ajoutes d'autres pages
+    base_url = "https://www.luckyai.fr"
+    lastmod = datetime.utcnow().date().isoformat()
+
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{base_url}/</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+"""
+    return Response(content=xml, media_type="application/xml")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(loto_router, prefix="/api/loto", tags=["loto"])
+app.include_router(euromillions_router, prefix="/api/euromillions", tags=["euromillions"])
+app.include_router(paywall_router, prefix="/api", tags=["paywall"])
+
+
+@app.get("/")
+def root():
+    return {"message": "LuckyAI backend OK"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
