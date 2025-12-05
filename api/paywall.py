@@ -36,8 +36,8 @@ def create_unlock_checkout():
                     "quantity": 1,
                 }
             ],
-success_url="https://www.luckyai.fr/index.html?premium=1",
-cancel_url="https://www.luckyai.fr/index.html",
+success_url = "https://www.luckyai.fr/?premium=1",
+cancel_url = "https://www.luckyai.fr/",
         )
 
         print("Stripe checkout session créée:", session.id)
