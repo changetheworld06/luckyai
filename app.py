@@ -15,10 +15,11 @@ from fastapi.responses import FileResponse
 # 🔁 Charge le .env
 load_dotenv()
 
-# ⚙️ Config Stripe à partir du .env
-stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "")
+raw_key = os.getenv("STRIPE_SECRET_KEY", "")
+stripe.api_key = raw_key.strip()
 
-print("DEBUG Stripe secret loaded:", bool(stripe.api_key))
+print("DEBUG Stripe key set ?", bool(stripe.api_key))
+print("DEBUG Stripe key length:", len(stripe.api_key))
 
 app = FastAPI(
     title="LuckyAI API",
