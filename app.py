@@ -26,6 +26,21 @@ app = FastAPI(
     version="0.1.0",
 )
 
+origins = [
+    "http://localhost:5500",
+    "http://localhost:8000",
+    "https://luckyai.fr",
+    "https://www.luckyai.fr",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Juste après `app = FastAPI()` et la config Stripe / CORS par exemple
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR / "frontend"

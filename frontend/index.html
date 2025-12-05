@@ -669,9 +669,13 @@
 
   <script>
     // Config API + Stripe
-    const API_BASE = "http://localhost:8000";
-    const STRIPE_PUBLISHABLE_KEY = "pk_test_51Sb5La2zIiwCh1duvrBhrQ1f0WDzaV0fcceB2SPsIO5GPOlMj4rsft8j6SbAYi5Gh51lL5UNyAjpyqkOqeZpIhL700DKTg7VX0"; // ta clé publishable TEST
-    const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
+    const API_BASE =
+  window.location.hostname === "localhost" && window.location.port === "5500"
+    ? "http://localhost:8000"
+    : window.location.origin;
+
+const STRIPE_PUBLISHABLE_KEY = "pk_live_xxxxxxxxxxxxxxxxxxxxx"; // ta clé live
+const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
   
     // ===== Gestion consentement cookies =====
     function getCookieConsent() {
@@ -1149,7 +1153,6 @@
     statusPill.style.background = "rgba(22,163,74,0.18)";
     statusLabel.textContent = message;
     statusIcon.textContent = "✅";
-    statusText.textContent = "Réponse OK depuis http://localhost:8000";
   }
 
   function setError(message) {
