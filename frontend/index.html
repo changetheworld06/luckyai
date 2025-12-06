@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>LuckyAI – Générateur de grilles Loto & Euromillions optimisées</title>
-    <meta name="description" content="LuckyAI analyse les tirages historiques réels du Loto et de l’Euromillions pour générer des grilles optimisées grâce à l’intelligence statistique. Aucun résultat garanti, uniquement de la data.">
+    <title>LuckyAI – Générateur de grilles Loto & Euromillions optimisées par la data</title>
+    <meta name="description" content="LuckyAI analyse les tirages historiques du Loto et de l’Euromillions pour générer des grilles optimisées grâce à la data. Aucun gain n’est garanti.">
     <meta name="keywords" content="Loto, Euromillions, tirages, intelligence artificielle, statistiques, algorithme, générateur numéros, LuckyAI">
     <meta name="robots" content="index, follow">
     <meta name="author" content="LuckyAI">
@@ -526,6 +526,97 @@
       color: var(--muted);
       border: 1px solid rgba(148, 163, 184, 0.6);
     }
+
+    /* ===== SECTION PARTAGE ===== */
+.share {
+  margin: 3rem auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  max-width: 700px;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
+
+.share p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  margin-bottom: 1.5rem;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-buttons a {
+  padding: 0.7rem 1.4rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.25s ease;
+  font-size: 0.95rem;
+  color: white;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
+  background-size: 200% 200%;
+  box-shadow: 0 0 10px rgba(100, 70, 255, 0.4);
+}
+
+.share-buttons a:hover {
+  background-position: 100% 0;
+  box-shadow: 0 0 18px rgba(236, 72, 153, 0.7);
+  transform: translateY(-2px);
+}
+
+/* ===== SECTION LIENS INTERNES ===== */
+.internal-links {
+  margin: 4rem auto;
+  max-width: 700px;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}
+
+.internal-links h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #f1f5f9;
+  margin-bottom: 1.3rem;
+  font-weight: 600;
+}
+
+.internal-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.internal-links li a {
+  display: block;
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #cbd5e1;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: 0.25s ease;
+}
+
+.internal-links li a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+}
   </style>
 </head>
 <body>
@@ -665,6 +756,22 @@
     <footer class="footer">
       LuckyAI ne garantit aucun gain. Jeu réservé aux adultes, jouez avec modération.
     </footer>
+    <section class="internal-links">
+      <h2>En savoir plus sur LuckyAI</h2>
+      <ul>
+        <li><a href="/a-propos.html">À propos de LuckyAI</a></li>
+        <li><a href="/faq.html">FAQ – Questions fréquentes</a></li>
+        <li><a href="/mentions-legales.html">Mentions légales</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+      </ul>
+    </section>
+    <section class="share">
+      <p>Tu aimes LuckyAI ? Partage-le avec tes amis :</p>
+      <div class="share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.luckyai.fr" target="_blank" rel="noopener noreferrer">Partager sur Facebook</a>
+        <a href="https://twitter.com/intent/tweet?url=https://www.luckyai.fr&text=Découvre LuckyAI, un générateur de grilles Loto & Euromillions optimisées par la data" target="_blank" rel="noopener noreferrer">Partager sur X</a>
+      </div>
+    </section>
   </main>
 
   <script>
@@ -739,7 +846,14 @@ const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
       gtag("js", new Date());
       gtag("config", "G-VGN26YL2RJ");
     };
-  }
+  
+      // ---------- Google AdSense ----------
+  const adsScript = document.createElement("script");
+  adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476";
+  adsScript.async = true;
+  adsScript.crossOrigin = "anonymous";
+  document.head.appendChild(adsScript);
+}
 
     // Références DOM
     const btnLoto = document.getElementById("btn-loto");
