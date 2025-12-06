@@ -4,7 +4,7 @@ import stripe
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from fastapi.responses import Response
+from fastapi.responses import Response, FileResponse
 from datetime import datetime
 from api.loto import router as loto_router
 from api.euromillions import router as euromillions_router
@@ -54,6 +54,11 @@ async def serve_frontend():
         # aide au debug si jamais le chemin est faux
         return {"error": "index.html introuvable", "path": str(index_path)}
     return FileResponse(str(index_path))
+
+
+@app.get("/ads.txt", include_in_schema=False)
+def ads_txt():
+    return FileResponse("ads.txt", media_type="text/plain; charset=utf-8")
 
 @app.get("/sitemap.xml", response_class=Response)
 def sitemap():
