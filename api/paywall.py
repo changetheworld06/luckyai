@@ -31,7 +31,7 @@ def create_unlock_checkout():
                         "product_data": {
                             "name": "Déblocage des meilleures grilles LuckyAI",
                         },
-                        "unit_amount": 50,  # 0,50 € en centimes
+                        "unit_amount": 99,  # 0,99 € en centimes
                     },
                     "quantity": 1,
                 }
