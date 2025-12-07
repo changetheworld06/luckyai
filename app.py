@@ -68,6 +68,16 @@ async def serve_frontend():
         return {"error": "index.html introuvable", "path": str(index_path)}
     return FileResponse(str(index_path))
 
+@app.get("/sitemap.xml", include_in_schema=False)
+def sitemap_xml():
+    sitemap_path = os.path.join(BASE_DIR, "sitemap.xml")
+    return FileResponse(sitemap_path, media_type="application/xml")
+
+@app.get("/robots.txt", include_in_schema=False)
+def robots_txt():
+    robots_path = os.path.join(BASE_DIR, "robots.txt")
+    return FileResponse(robots_path, media_type="text/plain")
+
 @app.get("/ads.txt", include_in_schema=False)
 def ads_txt():
     return FileResponse("ads.txt", media_type="text/plain; charset=utf-8")
