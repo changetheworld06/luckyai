@@ -13,10 +13,7 @@ from pathlib import Path
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-
 app = FastAPI()
-# 🔁 Charge le .env
-load_dotenv()
 
 load_dotenv()
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
@@ -29,6 +26,13 @@ app = FastAPI(
 )
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Servir les fichiers statiques
+app.mount(
+    "/static",
+    StaticFiles(directory=os.path.join(BASE_DIR, "static")),
+    name="static",
+)
 
 app.mount(
     "/pages",
@@ -64,43 +68,9 @@ async def serve_frontend():
         return {"error": "index.html introuvable", "path": str(index_path)}
     return FileResponse(str(index_path))
 
-@app.route("/a-propos")
-def about():
-    return send_from_directory("pages", "a-propos.html")
-
-@app.route("/faq")
-def faq():
-    return send_from_directory("pages", "faq.html")
-
-@app.route("/mentions-legales")
-def mentions_legales():
-    return send_from_directory("pages", "mentions-legales.html")
-
-@app.route("/contact")
-def contact():
-    return send_from_directory("pages", "contact.html")
-
 @app.get("/ads.txt", include_in_schema=False)
 def ads_txt():
     return FileResponse("ads.txt", media_type="text/plain; charset=utf-8")
-
-@app.get("/sitemap.xml", response_class=Response)
-def sitemap():
-    # À adapter si tu ajoutes d'autres pages
-    base_url = "https://www.luckyai.fr"
-    lastmod = datetime.utcnow().date().isoformat()
-
-    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>{base_url}/</loc>
-    <lastmod>{lastmod}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-</urlset>
-"""
-    return Response(content=xml, media_type="application/xml")
 
 app.add_middleware(
     CORSMiddleware,
