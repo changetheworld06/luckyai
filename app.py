@@ -11,6 +11,27 @@ from api.euromillions import router as euromillions_router
 from api.paywall import router as paywall_router
 from pathlib import Path
 from fastapi.responses import FileResponse
+from flask import Flask, render_template, send_from_directory
+
+app = Flask(__name__)
+
+# ===== Routes pages statiques =====
+
+@app.route("/a-propos")
+def about():
+    return send_from_directory("pages", "a-propos.html")
+
+@app.route("/faq")
+def faq():
+    return send_from_directory("pages", "faq.html")
+
+@app.route("/mentions-legales")
+def mentions_legales():
+    return send_from_directory("pages", "mentions-legales.html")
+
+@app.route("/contact")
+def contact():
+    return send_from_directory("pages", "contact.html")
 
 # 🔁 Charge le .env
 load_dotenv()
@@ -53,6 +74,21 @@ async def serve_frontend():
         return {"error": "index.html introuvable", "path": str(index_path)}
     return FileResponse(str(index_path))
 
+@app.route("/a-propos")
+def about():
+    return send_from_directory("pages", "a-propos.html")
+
+@app.route("/faq")
+def faq():
+    return send_from_directory("pages", "faq.html")
+
+@app.route("/mentions-legales")
+def mentions_legales():
+    return send_from_directory("pages", "mentions-legales.html")
+
+@app.route("/contact")
+def contact():
+    return send_from_directory("pages", "contact.html")
 
 @app.get("/ads.txt", include_in_schema=False)
 def ads_txt():
