@@ -585,3 +585,219 @@ a:hover {
   border: 1px solid rgba(148, 163, 184, 0.35) !important;
 }
 
+    /* ===== BLOG LUCKYAI ===== */
+    
+    .blog-hero {
+      padding: 3.5rem 1.5rem 2.5rem;
+      background: radial-gradient(circle at top, rgba(96, 165, 250, 0.15), transparent 60%),
+                  radial-gradient(circle at bottom, rgba(244, 114, 182, 0.12), transparent 55%),
+                  #020617;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+    }
+    
+    .blog-hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .blog-badge {
+      display: inline-block;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      margin-bottom: 0.9rem;
+    }
+    
+    .blog-hero h1 {
+      font-size: 2.2rem;
+      line-height: 1.2;
+      margin: 0 0 0.6rem;
+      color: #f9fafb;
+    }
+    
+    .blog-subtitle {
+      margin: 0 0 1.2rem;
+      color: #cbd5f5;
+      max-width: 650px;
+    }
+    
+    .blog-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.3rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(120deg, #38bdf8, #6366f1, #ec4899);
+      color: #0b1020;
+      font-weight: 600;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+    
+    .btn-outline {
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #e5e7eb;
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(15, 23, 42, 0.75);
+    }
+    
+    .blog-note {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    
+    .blog-main {
+      padding: 2.5rem 1.5rem 3rem;
+      background: #020617;
+      min-height: 60vh;
+    }
+    
+    .blog-list {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 1.8rem;
+    }
+    
+    .blog-card {
+      padding: 1.4rem 1.5rem;
+      border-radius: 14px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 55%),
+                  #020617;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
+    }
+    
+    .blog-card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.9);
+      color: #bfdbfe;
+      margin-bottom: 0.55rem;
+    }
+    
+    .blog-card-title {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+    
+    .blog-card-title a {
+      color: #f9fafb;
+      text-decoration: none;
+    }
+    
+    .blog-card-title a:hover {
+      text-decoration: underline;
+    }
+    
+    .blog-card-meta {
+      margin: 0.1rem 0 0.6rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    
+    .blog-card-excerpt {
+      margin: 0 0 0.8rem;
+      color: #e5e7eb;
+      font-size: 0.95rem;
+    }
+    
+    .blog-card-link {
+      font-size: 0.9rem;
+      color: #7dd3fc;
+      text-decoration: none;
+    }
+    
+    .blog-card-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Articles */
+    
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    
+    .article-container .back-home {
+      margin-bottom: 0.7rem;
+    }
+    
+    .article-container .back-home a {
+      color: #9ca3af;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
+    
+    .article-container .back-home a:hover {
+      text-decoration: underline;
+    }
+    
+    .article-container h1 {
+      font-size: 2rem;
+      margin: 0 0 0.4rem;
+      color: #f9fafb;
+    }
+    
+    .article-container .date {
+      margin-bottom: 1.4rem;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+    
+    .article-container p {
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+    }
+    
+    .article-container h2 {
+      margin-top: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.35rem;
+    }
+    
+    .article-container ul {
+      padding-left: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    
+    .notice-fdj {
+      margin-top: 2rem;
+      padding: 1rem 1.1rem;
+      border-radius: 10px;
+      background: rgba(37, 99, 235, 0.22);
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
