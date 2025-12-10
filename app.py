@@ -60,6 +60,19 @@ BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR / "frontend"
 
 
+# Servir le blog
+@app.get("/blog/")
+def blog_index():
+    return FileResponse("blog/index.html")
+
+@app.get("/blog/{filename}")
+def blog_pages(filename: str):
+    # Ex: cycles-loto.html
+    path = f"blog/{filename}"
+    if os.path.exists(path):
+        return FileResponse(path)
+    return {"detail": "Not Found"}
+
 @app.get("/")
 async def serve_frontend():
     index_path = FRONTEND_DIR / "index.html"
