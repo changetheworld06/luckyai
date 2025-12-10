@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+      <!-- CMP Ezoic (obligatoire, doit être en premier) -->
+  <script src="https://cmp.gatekeeperconsent.com/min.js" data-cfasync="false"></script>
+  <script src="https://the.gatekeeperconsent.com/cmp.min.js" data-cfasync="false"></script>
+
+  <!-- Script Header Ezoic -->
+  <script async src="//www.ezojs.com/ezoic/sa.min.js"></script>
+  <script>
+      window.ezstandalone = window.ezstandalone || {};
+      ezstandalone.cmd = ezstandalone.cmd || [];
+  </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  
     <title>LuckyAI – Grilles Loto & Euromillions optimisées par la data</title>
     <meta name="description" content="LuckyAI analyse les tirages historiques du Loto et de l’Euromillions pour générer des grilles optimisées grâce à la data. Aucun gain n’est garanti.">
     <meta name="keywords" content="Loto, Euromillions, tirages, intelligence artificielle, statistiques, algorithme, générateur numéros, LuckyAI">
@@ -11,82 +21,54 @@
     <meta name="author" content="LuckyAI">
     
     <link rel="stylesheet" href="/static/style.css?v=2">
-
+  
     <!-- Canonical -->
     <link rel="canonical" href="https://www.luckyai.fr">
-
+  
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://www.luckyai.fr/static/favicon.ico" />
     <link rel="shortcut icon" href="https://www.luckyai.fr/static/favicon.ico" />
     <link rel="apple-touch-icon" href="https://www.luckyai.fr/static/apple-touch-icon.png" />
-
+  
     <!-- Open Graph (Facebook / LinkedIn) -->
     <meta property="og:title" content="LuckyAI – Boostez vos chances au Loto avec la data" />
     <meta property="og:description" content="LuckyAI analyse les anciens tirages du Loto et de l’Euromillions pour générer des numéros optimisés grâce à l’intelligence statistique." />
     <meta property="og:image" content="https://www.luckyai.fr/static/logo.png" />
     <meta property="og:url" content="https://www.luckyai.fr" />
     <meta property="og:type" content="website" />
-
+  
     <!-- hreflang -->
     <link rel="alternate" hreflang="fr" href="https://www.luckyai.fr/" />
-
+  
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="LuckyAI – IA pour optimiser vos grilles de Loto" />
     <meta name="twitter:description" content="LuckyAI génère des numéros optimisés en analysant les tirages historiques du Loto et de l’Euromillions." />
     <meta name="twitter:image" content="https://www.luckyai.fr/static/logo.png" />
-
+  
     <!-- Schema.org JSON-LD -->
-    <!-- Schema.org Service -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "LuckyAI – Générateur de grilles Loto & Euromillions",
-        "description": "LuckyAI analyse les tirages historiques du Loto et de l’Euromillions et génère des grilles pondérées selon des critères statistiques.",
-        "provider": {
-          "@type": "Organization",
-          "name": "LuckyAI",
-          "url": "https://www.luckyai.fr"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "France"
-        },
-        "serviceType": "Outil d'analyse statistique pour grilles de jeux de hasard"
-      }
-      </script>
-
-    <!-- Google Analytics + AdSense (chargés après consentement) -->
-    <script>
-      function loadTrackingScripts() {
-          // Google Analytics (GA4)
-          const gtagScript = document.createElement("script");
-          gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
-          gtagScript.async = true;
-          document.head.appendChild(gtagScript);
-
-          gtagScript.onload = () => {
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){ dataLayer.push(arguments); }
-              window.gtag = gtag;
-              gtag('js', new Date());
-              gtag('config', 'G-VGN26YL2RJ');
-          };
-
-          // Google AdSense
-          const adsScript = document.createElement("script");
-          adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476";
-          adsScript.async = true;
-          adsScript.crossOrigin = "anonymous";
-          document.head.appendChild(adsScript);
-      }
-  </script>
-
-  <!-- Stripe -->
-  <script src="https://js.stripe.com/v3/"></script>
-
-</head>
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "LuckyAI – Générateur de grilles Loto & Euromillions",
+      "description": "LuckyAI analyse les tirages historiques du Loto et de l’Euromillions et génère des grilles pondérées selon des critères statistiques.",
+      "provider": {
+        "@type": "Organization",
+        "name": "LuckyAI",
+        "url": "https://www.luckyai.fr"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "serviceType": "Outil d'analyse statistique pour grilles de jeux de hasard"
+    }
+    </script>
+  
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
 <body>
   <main class="page">
     <header>
@@ -338,36 +320,29 @@ const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
       });
   
       btnReject.addEventListener("click", () => {
-        setCookieConsent("rejected");
-        banner.classList.remove("visible");
-        // pas de scripts Analytics/Adsense
-      });
+  setCookieConsent("rejected");
+  banner.classList.remove("visible");
+  // pas de scripts Analytics/publicité
+});
     }
-      // ===== Google Analytics (G-VGN26YL2RJ) =====
-  function loadTrackingScripts() {
-    // Google Analytics
-    const gtagScript = document.createElement("script");
-    gtagScript.src =
-      "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
-    gtagScript.async = true;
-    document.head.appendChild(gtagScript);
+// ===== Google Analytics (G-VGN26YL2RJ) =====
+function loadTrackingScripts() {
+  // Google Analytics
+  const gtagScript = document.createElement("script");
+  gtagScript.src =
+    "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
+  gtagScript.async = true;
+  document.head.appendChild(gtagScript);
 
-    gtagScript.onload = () => {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      window.gtag = gtag;
-      gtag("js", new Date());
-      gtag("config", "G-VGN26YL2RJ");
-    };
-  
-      // ---------- Google AdSense ----------
-  const adsScript = document.createElement("script");
-  adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476";
-  adsScript.async = true;
-  adsScript.crossOrigin = "anonymous";
-  document.head.appendChild(adsScript);
+  gtagScript.onload = () => {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", "G-VGN26YL2RJ");
+  };
 }
 
     // Références DOM
@@ -838,7 +813,8 @@ const stripeClient = Stripe(STRIPE_PUBLISHABLE_KEY);
   <!-- Bandeau cookies RGPD -->
   <div id="cookie-banner" class="cookie-banner">
     <div class="cookie-text">
-      LuckyAI utilise des cookies pour mesurer l’audience (Google Analytics) et afficher des publicités (AdSense).
+      LuckyAI utilise des cookies pour mesurer l’audience (Google Analytics)
+      et pour l’affichage de publicités via notre partenaire Ezoic.
       Vous pouvez accepter ou refuser ces cookies facultatifs.
     </div>
     <div class="cookie-actions">
