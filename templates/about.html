@@ -1,23 +1,60 @@
-<!-- about.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>À propos - LuckyAI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>À propos de LuckyAI</h1>
-    </header>
-    <section>
-        <p>LuckyAI est un projet innovant utilisant l'intelligence artificielle pour analyser les tendances des tirages du loto et de l'EuroMillions.</p>
-        <p>Notre objectif est d'offrir aux joueurs des grilles optimisées en s'appuyant sur des modèles prédictifs avancés.</p>
-        <p>LuckyAI est un outil statistique indépendant et ne garantit aucun gain.</p>
-    </section>
-    <footer>
-        <p><a href="/">Retour à l'accueil</a></p>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}A propos - LuckyAI{% endblock %}
+{% block content %}
+<section class="section page-content">
+    <div class="page-container">
+        <h1>A propos de LuckyAI</h1>
+
+        <h2>Notre mission</h2>
+        <p>
+            LuckyAI est un outil d'analyse statistique du Loto propulse par l'intelligence artificielle.
+            Notre objectif est d'exploiter la puissance du machine learning et de l'analyse de donnees
+            pour detecter des tendances et des schemas recurrents dans des milliers de tirages historiques.
+        </p>
+
+        <h2>Comment ca fonctionne</h2>
+        <p>
+            Notre algorithme analyse en profondeur l'historique complet des tirages du Loto francais
+            pour identifier des patterns statistiques. Plusieurs axes d'analyse sont utilises :
+        </p>
+        <ul>
+            <li><strong>Analyse des ecarts</strong> : detection des numeros en retard par rapport a leur frequence theorique d'apparition.</li>
+            <li><strong>Detection de paires</strong> : identification des combinaisons de numeros qui apparaissent frequemment ensemble.</li>
+            <li><strong>Analyse de distribution</strong> : etude de la repartition des numeros par plage, parite et somme globale.</li>
+        </ul>
+
+        <h2>Nos 4 strategies</h2>
+        <p>
+            A partir de ces analyses, LuckyAI propose quatre strategies de generation de grilles :
+        </p>
+        <ul>
+            <li><strong>Composite</strong> : une approche equilibree combinant tous les indicateurs statistiques pour une grille optimisee.</li>
+            <li><strong>Hot (Numeros chauds)</strong> : privilegie les numeros les plus frequemment tires sur les periodes recentes.</li>
+            <li><strong>Cold (Numeros froids)</strong> : mise sur les numeros en retard, selon la loi des grands nombres.</li>
+            <li><strong>Balanced (Equilibree)</strong> : recherche un equilibre entre parite, plages de numeros et distribution globale.</li>
+        </ul>
+
+        <h2>Gratuit et transparent</h2>
+        <p>
+            LuckyAI est un service entierement gratuit. Aucune inscription n'est requise,
+            aucune donnee personnelle n'est collectee. L'ensemble de nos analyses repose sur
+            des methodes statistiques documentees et reproductibles.
+        </p>
+
+        <h2>Avertissement</h2>
+        <p>
+            Le Loto reste un jeu de hasard. LuckyAI ne garantit en aucun cas un gain.
+            Nos analyses statistiques permettent d'explorer les donnees historiques de maniere
+            rationnelle, mais chaque tirage est un evenement independant. Jouez de maniere responsable.
+        </p>
+
+        <h2>Le fondateur</h2>
+        <p>
+            LuckyAI a ete cree par un developpeur passionne par la data science et les probabilites.
+            Convaincu que l'analyse de donnees peut apporter un eclairage interessant sur les jeux de hasard,
+            il a concu cet outil pour rendre accessible a tous des techniques d'analyse habituellement
+            reservees aux specialistes.
+        </p>
+    </div>
+</section>
+{% endblock %}

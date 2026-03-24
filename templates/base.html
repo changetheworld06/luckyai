@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}LuckyAI - Analyse IA du Loto{% endblock %}</title>
+    <meta name="description" content="{% block description %}LuckyAI analyse les patterns statistiques du Loto avec l'IA pour generer des grilles optimisees.{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="LuckyAI">
+    <link rel="canonical" href="https://www.luckyai.fr{% block canonical %}{% endblock %}">
+    <link rel="icon" type="image/png" href="https://www.luckyai.fr/static/favicon.ico">
+    <meta property="og:title" content="{% block og_title %}LuckyAI{% endblock %}">
+    <meta property="og:description" content="{% block og_desc %}Analyse statistique avancee du Loto et EuroMillions.{% endblock %}">
+    <meta property="og:url" content="https://www.luckyai.fr">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <link rel="alternate" hreflang="fr" href="https://www.luckyai.fr/">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="logo">Lucky<span>AI</span></a>
+        <ul>
+            <li><a href="/">Accueil</a></li>
+            <li><a href="{{ url_for('blog') }}">Blog</a></li>
+            <li><a href="{{ url_for('about') }}">A propos</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<footer>
+    <div class="footer-inner">
+        <p>&copy; 2025 LuckyAI - Tous droits reserves.</p>
+        <p>
+            <a href="{{ url_for('mentions_legales') }}">Mentions Legales</a> |
+            <a href="{{ url_for('cgv') }}">CGV</a> |
+            <a href="{{ url_for('confidentialite') }}">Confidentialite</a> |
+            <a href="{{ url_for('about') }}">A propos</a> |
+            <a href="{{ url_for('contact') }}">Contact</a> |
+            <a href="{{ url_for('blog') }}">Blog</a>
+        </p>
+    </div>
+</footer>
+
+<div id="cookie-banner" style="display:none;">
+    Ce site utilise des cookies pour ameliorer l'experience utilisateur.
+    <button id="acceptCookies">Accepter</button>
+    <button id="declineCookies">Refuser</button>
+</div>
+
+<script>
+function setCookie(n,v,d){let e="";if(d){const dt=new Date();dt.setTime(dt.getTime()+(d*864e5));e="; expires="+dt.toUTCString()}document.cookie=n+"="+v+e+"; path=/"}
+function getCookie(n){return document.cookie.split('; ').find(r=>r.startsWith(n+'='))?.split('=')[1]}
+window.addEventListener('DOMContentLoaded',function(){
+    const banner=document.getElementById("cookie-banner");
+    const consent=getCookie("cookieConsent");
+    if(!consent) banner.style.display="flex";
+    document.getElementById("acceptCookies").addEventListener("click",function(){setCookie("cookieConsent","true",365);banner.style.display="none";loadTracking()});
+    document.getElementById("declineCookies").addEventListener("click",function(){setCookie("cookieConsent","false",365);banner.style.display="none"});
+    if(consent==="true") loadTracking();
+});
+function loadTracking(){
+    const s=document.createElement('script');s.src="https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";s.async=true;document.head.appendChild(s);
+    s.onload=()=>{window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','G-VGN26YL2RJ')};
+}
+</script>
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

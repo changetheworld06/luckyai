@@ -1,285 +1,450 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <title>Lucky AI - Générez vos numéros de Loto avec l'IA</title>
-        <meta name="description" content="Lucky AI utilise l'intelligence artificielle pour générer des grilles de Loto optimisées et augmenter vos chances de gagner. Essayez dès maintenant !">
-        <meta name="keywords" content="Loto, Euromillions, Intelligence Artificielle, Algorithme, Prédictions">
-        <meta name="robots" content="index, follow">
-        <meta name="author" content="LuckyAI">
-        <link rel="canonical" href="https://www.luckyai.fr">
-    
-        <!-- Favicon -->
-        <link rel="icon" type="image/png" href="https://www.luckyai.fr/static/favicon.ico">
-        <link rel="shortcut icon" href="https://www.luckyai.fr/static/favicon.ico">
-    
-        <!-- Open Graph Meta (SEO & Partage Réseaux Sociaux) -->
-        <meta property="og:title" content="LuckyAI - Boostez vos chances au Loto avec l'IA">
-        <meta property="og:description" content="LuckyAI analyse les anciens tirages du Loto et génère des numéros optimisés grâce à l'intelligence artificielle.">
-        <meta property="og:image" content="https://www.luckyai.fr/static/logo.png">
-        <meta property="og:url" content="https://www.luckyai.fr">
-        <meta property="og:type" content="website">
+{% extends "base.html" %}
+{% block title %}LuckyAI - Analyse IA du Loto et EuroMillions | Trouvez les patterns{% endblock %}
+{% block description %}LuckyAI analyse les patterns statistiques de milliers de tirages du Loto et EuroMillions avec l'IA pour generer des grilles optimisees.{% endblock %}
 
-        <link rel="alternate" hreflang="fr" href="https://www.luckyai.fr/" />
-        <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
-    
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="LuckyAI - IA pour optimiser vos grilles de Loto">
-        <meta name="twitter:description" content="LuckyAI analyse les anciens tirages du Loto et génère des numéros optimisés grâce à l'intelligence artificielle.">
-        <meta name="twitter:image" content="https://www.luckyai.fr/static/logo.png">
-    
-        <!-- Balise Schema.org pour Google -->
-        <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "LuckyAI",
-            "url": "https://www.luckyai.fr",
-            "logo": "https://www.luckyai.fr/static/logo.png"
-        }
-        </script>
-    
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476"
-     crossorigin="anonymous"></script>
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2161270640127476" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"LuckyAI","url":"https://www.luckyai.fr"}
+</script>
+{% endblock %}
 
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('about') }}">À propos</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                <li><a href="{{ url_for('blog') }}">Blog</a></li>
-            </ul>
-        </nav>
-        <style>
-#cookie-banner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(34, 34, 34, 0.95); /* fond sombre avec transparence */
-  color: #fff;
-  padding: 30px;
-  text-align: center;
-  z-index: 9999;
-  font-size: 1em;
-  border-radius: 8px;
-  max-width: 90%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-            #cookie-banner button {
-              margin-left: 10px;
-              padding: 8px 15px;
-              border: none;
-              cursor: pointer;
-              font-weight: bold;
-            }
-            #acceptCookies { background-color: #4CAF50; color: white; }
-            #declineCookies {
-  background-color: transparent;
-  color: #ccc;
-  border: 1px solid #555;
-  opacity: 0.6;
-}
-#declineCookies:hover {
-  opacity: 1;
-  color: #fff;
-  border-color: #888;
-}
-            </style>
-    </head>
-<body>
+{% block content %}
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Analyse <span class="gradient-text">intelligente</span> du Loto & EuroMillions</h1>
+        <p class="hero-sub">Notre IA analyse <strong id="totalDraws">...</strong> tirages historiques pour detecter les patterns statistiques et generer des grilles optimisees.</p>
+        <div class="hero-stats">
+            <div class="stat-pill"><span id="lastDate">...</span><small>Dernier tirage</small></div>
+            <div class="stat-pill"><span id="euroDraws">...</span><small>Tirages EuroMillions</small></div>
+            <div class="stat-pill"><span>4</span><small>Strategies IA</small></div>
+        </div>
+        <a href="#generator" class="cta-btn">Generer une grille</a>
+    </div>
+</section>
 
-    <header>
-        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" 
-             alt="Bannière LuckyAI" 
-             style="width:100%; max-height:300px; object-fit:cover;">
-        <p style="text-align:center; font-size:0.8em;">
-            <a href="https://fr.freepik.com/photos-gratuite/fond-humain-poignee-main-robot-ere-numerique-futuriste_17850426.htm">
-                Image de rawpixel.com sur Freepik
-            </a>
-        </p>
-    </header>
+<!-- GAME TABS -->
+<div class="section">
+    <div class="game-tabs">
+        <button class="game-tab active" data-game="loto">Loto (5/49 + Chance)</button>
+        <button class="game-tab" data-game="euro">EuroMillions (5/50 + 2 Etoiles)</button>
+    </div>
+</div>
 
-    <h1>LuckyAI : L'Intelligence Artificielle au Service de Votre Chance</h1>
-    <p>Générez une grille de tirage 5+1 L.O.T.O ou 5+2 E.U.R.O.M.I.L.L.I.O.N.S optimisée grâce à notre intelligence artificielle.</p>
+<!-- ===== LOTO SECTION ===== -->
+<div id="loto-section" class="game-section active">
 
-    <button id="buyLoto">Générer une grille L.O.T.O</button>
-    <button id="buyEuroMillions">Générer une grille E.U.R.O.M.I.L.L.I.O.N.S</button>
+<section id="analysis" class="section">
+    <h2 class="section-title">Analyse Loto</h2>
 
-    <div id="grilleContainer"></div>
+    <div class="card full-width">
+        <h3>Heatmap des 49 numeros <small>(frequence sur 50 derniers tirages)</small></h3>
+        <div id="heatmap" class="heatmap-grid"></div>
+    </div>
 
-    <section id="explanation">
-        <h2>🎯 LuckyAI : L’Intelligence Artificielle au service de votre chance</h2>
-        <p><strong>LuckyAI</strong> est un outil en ligne révolutionnaire qui utilise la puissance de l’<strong>intelligence artificielle</strong> pour vous aider à générer des <strong>grilles optimisées pour le Loto et l’EuroMillions</strong>. Si vous avez toujours rêvé d’augmenter vos chances de remporter le gros lot sans vous fier uniquement au hasard, vous êtes au bon endroit.</p>
-      
-        <h3>🤖 Pourquoi utiliser l’IA pour jouer au Loto ?</h3>
-        <p>Le Loto est un jeu de pur hasard… en théorie. Pourtant, des milliers de joueurs à travers le monde étudient les tirages passés, analysent les combinaisons, et utilisent des stratégies pour essayer d’augmenter leurs chances. Avec <strong>LuckyAI</strong>, vous bénéficiez d’un outil qui fait cela pour vous, en quelques secondes.</p>
-      
-        <p>Notre <strong>algorithme d’intelligence artificielle</strong> est capable d’analyser des centaines de tirages, de repérer des schémas, d’éviter les erreurs classiques (comme les dates de naissance ou les suites logiques), et de proposer des grilles plus équilibrées et moins jouées.</p>
-      
-        <h3>📊 Que fait exactement LuckyAI ?</h3>
-        <ul>
-          <li>📈 Analyse des tirages précédents (Loto, EuroMillions…)</li>
-          <li>🧠 Prédiction probabiliste basée sur des modèles de machine learning</li>
-          <li>🎟️ Génération de grilles intelligentes et variées</li>
-          <li>📉 Évitement des combinaisons trop populaires</li>
-        </ul>
-      
-        <p>Le tout en restant simple, rapide et 100 % accessible depuis votre navigateur. Pas besoin d’installer quoi que ce soit !</p>
-      
-        <h3>🧠 Comment fonctionne notre IA ?</h3>
-        <ul>
-          <li>🔍 L’IA repère les numéros fréquemment tirés ou absents depuis longtemps</li>
-          <li>📊 Elle équilibre la répartition des chiffres (pairs/impairs, hauts/bas)</li>
-          <li>🎲 Elle évite les grilles trop simples ou trop souvent choisies</li>
-        </ul>
-      
-        <p><strong>Résultat :</strong> des grilles plus optimisées, un jeu plus stratégique, et une meilleure répartition des probabilités.</p>
-      
-        <h3>💡 Pourquoi éviter les grilles classiques ?</h3>
-        <p>Une majorité de joueurs choisissent des chiffres bas (1 à 31), liés aux dates de naissance. D’autres utilisent des séquences faciles (1-2-3-4-5). Si une de ces grilles gagne, elle sera partagée entre des milliers de personnes… et vos gains seront largement réduits. <strong>LuckyAI</strong> vous aide à éviter ces pièges.</p>
-      
-        <h3>⚙️ Utilisation simple et rapide</h3>
-        <ul>
-          <li><strong>1️⃣ Entrez le jeu souhaité</strong> – Loto, EuroMillions…</li>
-          <li><strong>3️⃣ Cliquez sur "Générer"</strong> – En un instant, vos numéros sont prêts</li>
-          <li><strong>4️⃣ Jouez vos numéros !</strong> – Rendez-vous sur le site officiel de la <a href="https://www.fdj.fr" target="_blank">FDJ</a></li>
-        </ul>
-      
-        <p>Chaque grille est unique, optimisée et basée sur une analyse poussée. À vous de jouer !</p>
-      
-        <h3>📢 Ce que LuckyAI n’est pas</h3>
-        <p>LuckyAI n’est pas un site de paris, ni une promesse de victoire. Nous ne prétendons pas pouvoir prédire les numéros gagnants. Le Loto reste un jeu de hasard. En revanche, nous croyons que l’on peut jouer de manière plus stratégique, plus intelligente, et plus efficace grâce à l’<strong>analyse de données</strong>.</p>
-      
-        <h3>🍀 Nos conseils pour jouer de façon responsable</h3>
-        <ul>
-          <li>✅ Ne jouez que ce que vous pouvez vous permettre de perdre</li>
-          <li>✅ Considérez le jeu comme un divertissement, pas une source de revenus</li>
-          <li>✅ Diversifiez vos grilles</li>
-          <li>✅ Ne misez jamais sous pression ou en espérant "rattraper" une perte</li>
-        </ul>
-      
-        <p><strong>La chance ne se contrôle pas, mais l’approche peut faire toute la différence.</strong></p>
-      
-        <h3>🚀 Prêt à générer votre première grille ?</h3>
-        <p>Essayez LuckyAI dès maintenant, gratuitement. Générez des grilles de Loto optimisées grâce à l’IA et découvrez une nouvelle façon de jouer, plus intelligente et plus amusante.</p>
-      
-        <p><strong>LuckyAI</strong> : Boostez vos chances, pas vos mises.</p>
-      </section>
+    <div class="cards-row">
+        <div class="card">
+            <h3>Numeros chauds</h3>
+            <p class="card-desc">Les plus tires sur les 50 derniers tirages</p>
+            <canvas id="chartHot"></canvas>
+        </div>
+        <div class="card">
+            <h3>Numeros froids</h3>
+            <p class="card-desc">Les moins tires recemment</p>
+            <canvas id="chartCold"></canvas>
+        </div>
+    </div>
 
-    <footer>
-        <p>© 2025 Lucky AI - Tous droits réservés.</p>
-        <p>
-            <a href="{{ url_for('mentions_legales') }}">Mentions Légales</a> | 
-            <a href="{{ url_for('cgv') }}">CGV</a> | 
-            <a href="{{ url_for('confidentialite') }}">FAQ</a>
-        </p>
+    <div class="cards-row">
+        <div class="card">
+            <h3>Numeros en retard</h3>
+            <p class="card-desc">Gap actuel vs gap moyen (ratio > 1 = en retard)</p>
+            <canvas id="chartGaps"></canvas>
+        </div>
+        <div class="card">
+            <h3>Distribution</h3>
+            <p class="card-desc">Repartition pairs/impairs et bas/hauts</p>
+            <canvas id="chartDist"></canvas>
+        </div>
+    </div>
 
-        <section class="navigation">
-            <a href="{{ url_for('about') }}" class="btn">À propos</a>
-            <a href="{{ url_for('contact') }}" class="btn">Contact</a>
-            <a href="{{ url_for('blog') }}" class="btn">Blog</a>
-        </section>
-    </footer>
+    <div class="cards-row">
+        <div class="card">
+            <h3>Paires frequentes</h3>
+            <p class="card-desc">Les duos qui sortent le plus souvent ensemble</p>
+            <canvas id="chartPairs"></canvas>
+        </div>
+        <div class="card">
+            <h3>Score composite IA</h3>
+            <p class="card-desc">Score combine : frequence + retard + historique</p>
+            <canvas id="chartComposite"></canvas>
+        </div>
+    </div>
 
-    <script>
-        async function generateGrille(jeu) {
-            try {
-                const response = await fetch(`/get_grille?jeu=${jeu}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" }
-                });
-                const data = await response.json();
-    
-                if (data.grille || data.numeros) {
-                    // Affichage dynamique de la grille générée
-                    document.getElementById("grilleContainer").innerHTML = `
-                        <h3>Votre grille générée :</h3>
-                        <p>
-                            ${jeu === "loto" 
-                                ? data.grille.join(" - ") + " (Numéro chance : " + data.numero_chance + ")"
-                                : data.numeros.join(" - ") + " | ⭐ " + data.etoiles.join(" - ")}
-                        </p>
-                    `;
-                } else {
-                    alert("Erreur lors de la génération de la grille.");
-                }
-            } catch (error) {
-                console.error("Erreur:", error);
-                alert("Une erreur est survenue lors de la génération de la grille.");
-            }
-        }
-    
-        document.getElementById("buyLoto").addEventListener("click", function() {
-            generateGrille("loto");
-        });
-    
-        document.getElementById("buyEuroMillions").addEventListener("click", function() {
-            generateGrille("euromillions");
-        });
-    </script>
-<div id="cookie-banner" style="display: none;">
-    Ce site utilise des cookies pour améliorer l’expérience utilisateur (ex. : Google Analytics).
-    <button id="acceptCookies">Accepter</button>
-    <button id="declineCookies">Refuser</button>
-  </div>
+    <div class="card full-width">
+        <h3>Derniers tirages Loto</h3>
+        <div id="lastDraws" class="draws-table"></div>
+    </div>
+</section>
 
-  <script>
-    function setCookie(name, value, days) {
-        let expires = "";
-        if (days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + value + expires + "; path=/";
-    }
-    function getCookie(name) {
-        return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
-    }
-    
-    window.addEventListener('DOMContentLoaded', function () {
-        const banner = document.getElementById("cookie-banner");
-        const consent = getCookie("cookieConsent");
-    
-        if (!consent) {
-            banner.style.display = "block";
-        }
-    
-        document.getElementById("acceptCookies").addEventListener("click", function () {
-            setCookie("cookieConsent", "true", 365);
-            banner.style.display = "none";
-            loadTrackingScripts();
-        });
-    
-        document.getElementById("declineCookies").addEventListener("click", function () {
-            setCookie("cookieConsent", "false", 365);
-            banner.style.display = "none";
-        });
-    
-        if (consent === "true") {
-            loadTrackingScripts();
-        }
+<!-- LOTO GENERATOR -->
+<section id="generator" class="section">
+    <h2 class="section-title">Generateur de grilles Loto</h2>
+    <p class="section-desc">Choisissez une strategie basee sur notre analyse de 2733 tirages</p>
+
+    <div class="strategy-buttons">
+        <button class="strategy-btn active" data-strategy="composite" data-jeu="loto">
+            <span class="btn-icon">&#9733;</span>
+            <span class="btn-label">Composite</span>
+            <span class="btn-desc">Meilleur score global</span>
+        </button>
+        <button class="strategy-btn" data-strategy="hot" data-jeu="loto">
+            <span class="btn-icon">&#128293;</span>
+            <span class="btn-label">Chaud</span>
+            <span class="btn-desc">Numeros en serie</span>
+        </button>
+        <button class="strategy-btn" data-strategy="cold" data-jeu="loto">
+            <span class="btn-icon">&#10052;</span>
+            <span class="btn-label">Froid</span>
+            <span class="btn-desc">Numeros en retard</span>
+        </button>
+        <button class="strategy-btn" data-strategy="balanced" data-jeu="loto">
+            <span class="btn-icon">&#9878;</span>
+            <span class="btn-label">Equilibre</span>
+            <span class="btn-desc">Pairs/impairs optimal</span>
+        </button>
+    </div>
+
+    <div id="gridResult" class="grid-result hidden">
+        <div class="grid-label">Votre grille Loto <span id="gridStrategy"></span></div>
+        <div id="gridBalls" class="balls-container"></div>
+        <div id="gridChance" class="chance-container"></div>
+        <div id="gridExplanation" class="explanation"></div>
+    </div>
+</section>
+
+</div><!-- end loto-section -->
+
+<!-- ===== EUROMILLIONS SECTION ===== -->
+<div id="euro-section" class="game-section">
+
+<section class="section">
+    <h2 class="section-title">Analyse EuroMillions</h2>
+
+    <div class="card full-width">
+        <h3>Heatmap des 50 numeros <small>(frequence sur 50 derniers tirages)</small></h3>
+        <div id="euroHeatmap" class="heatmap-grid"></div>
+    </div>
+
+    <div class="cards-row">
+        <div class="card">
+            <h3>Numeros chauds</h3>
+            <p class="card-desc">Les plus tires sur les 50 derniers tirages EuroMillions</p>
+            <canvas id="euroChartHot"></canvas>
+        </div>
+        <div class="card">
+            <h3>Etoiles chaudes</h3>
+            <p class="card-desc">Les etoiles les plus frequentes</p>
+            <canvas id="euroChartStars"></canvas>
+        </div>
+    </div>
+
+    <div class="cards-row">
+        <div class="card">
+            <h3>Numeros en retard</h3>
+            <p class="card-desc">Gap actuel vs gap moyen</p>
+            <canvas id="euroChartGaps"></canvas>
+        </div>
+        <div class="card">
+            <h3>Score composite IA</h3>
+            <p class="card-desc">Score combine pour EuroMillions</p>
+            <canvas id="euroChartComposite"></canvas>
+        </div>
+    </div>
+
+    <div class="cards-row">
+        <div class="card">
+            <h3>Paires frequentes</h3>
+            <p class="card-desc">Les duos qui sortent le plus ensemble</p>
+            <canvas id="euroChartPairs"></canvas>
+        </div>
+        <div class="card">
+            <h3>Distribution</h3>
+            <p class="card-desc">Repartition pairs/impairs et bas/hauts</p>
+            <canvas id="euroChartDist"></canvas>
+        </div>
+    </div>
+</section>
+
+<!-- EURO GENERATOR -->
+<section class="section">
+    <h2 class="section-title">Generateur EuroMillions</h2>
+    <p class="section-desc">5 numeros (1-50) + 2 etoiles (1-12) optimises par l'IA</p>
+
+    <div class="strategy-buttons">
+        <button class="strategy-btn euro-gen active" data-strategy="composite">
+            <span class="btn-icon">&#9733;</span>
+            <span class="btn-label">Composite</span>
+            <span class="btn-desc">Meilleur score global</span>
+        </button>
+        <button class="strategy-btn euro-gen" data-strategy="hot">
+            <span class="btn-icon">&#128293;</span>
+            <span class="btn-label">Chaud</span>
+            <span class="btn-desc">Numeros en serie</span>
+        </button>
+        <button class="strategy-btn euro-gen" data-strategy="cold">
+            <span class="btn-icon">&#10052;</span>
+            <span class="btn-label">Froid</span>
+            <span class="btn-desc">Numeros en retard</span>
+        </button>
+    </div>
+
+    <div id="euroResult" class="grid-result hidden">
+        <div class="grid-label">Votre grille EuroMillions <span id="euroStrategy"></span></div>
+        <div id="euroBalls" class="balls-container"></div>
+        <div id="euroStars" class="stars-container"></div>
+        <div id="euroExplanation" class="explanation"></div>
+    </div>
+</section>
+
+</div><!-- end euro-section -->
+
+<!-- SEO CONTENT -->
+<section id="explanation" class="section seo-section">
+    <h2>LuckyAI : L'Intelligence Artificielle au service de votre chance</h2>
+    <p><strong>LuckyAI</strong> utilise des algorithmes d'analyse statistique avancee pour etudier les patterns dans les tirages historiques du Loto et de l'EuroMillions.</p>
+    <h3>Comment fonctionne notre analyse ?</h3>
+    <ul>
+        <li>Analyse de frequence sur plusieurs fenetres temporelles</li>
+        <li>Detection des numeros en retard excessif (gap analysis)</li>
+        <li>Identification des paires et triplets recurrents</li>
+        <li>Score composite combinant toutes les metriques</li>
+        <li>4 strategies de generation : Composite, Chaud, Froid, Equilibre</li>
+    </ul>
+    <h3>Jeu responsable</h3>
+    <p>Le Loto reste un jeu de hasard. LuckyAI ne garantit pas de gains. Jouez de maniere responsable et ne misez que ce que vous pouvez vous permettre de perdre.</p>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+let lotoData = null, euroData = null;
+
+// --- TABS ---
+document.querySelectorAll('.game-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        const game = this.dataset.game;
+        document.querySelectorAll('.game-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(game === 'loto' ? 'loto-section' : 'euro-section').classList.add('active');
     });
-    
-    function loadTrackingScripts() {
-        // Google Analytics
-        const gtagScript = document.createElement('script');
-        gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-VGN26YL2RJ";
-        gtagScript.async = true;
-        document.head.appendChild(gtagScript);
+});
 
-        gtagScript.onload = () => {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ dataLayer.push(arguments); }
-            window.gtag = gtag;
-            gtag('js', new Date());
-            gtag('config', 'G-VGN26YL2RJ');
-        };
+// --- LOAD DATA ---
+async function loadAll() {
+    const [lRes, eRes] = await Promise.all([
+        fetch('/api/analysis'),
+        fetch('/api/euro/analysis')
+    ]);
+    lotoData = await lRes.json();
+    euroData = await eRes.json();
+    renderLoto();
+    renderEuro();
+    document.getElementById('totalDraws').textContent = lotoData.total_draws.toLocaleString();
+    document.getElementById('lastDate').textContent = lotoData.last_draw_date;
+    document.getElementById('euroDraws').textContent = euroData.total_draws.toLocaleString();
+}
+
+// --- CHART DEFAULTS ---
+const chartOpts = {
+    responsive: true,
+    plugins: {legend: {display: false}},
+    scales: {
+        x: {ticks: {color: '#8b8ba8', font: {size: 10, family: 'Inter'}}, grid: {display: false}},
+        y: {ticks: {color: '#5a5a78', font: {family: 'Inter'}}, grid: {color: 'rgba(255,255,255,0.03)'}}
     }
-  </script>
-</body>
-</html>
+};
+
+function bar(id, labels, data, color, label) {
+    new Chart(document.getElementById(id), {
+        type: 'bar',
+        data: {labels, datasets: [{label, data, backgroundColor: color, borderRadius: 6, borderSkipped: false}]},
+        options: chartOpts
+    });
+}
+
+// --- HEATMAP ---
+function heatmap(containerId, hotData, maxNum) {
+    const el = document.getElementById(containerId);
+    const hotMap = {};
+    hotData.forEach(h => hotMap[h.num] = h.count);
+    const maxHot = Math.max(...Object.values(hotMap), 1);
+    let html = '';
+    for (let n = 1; n <= maxNum; n++) {
+        const count = hotMap[n] || 0;
+        const t = count / maxHot;
+        const hue = 220 - t * 160;
+        const sat = 50 + t * 40;
+        const lum = 16 + t * 38;
+        const border = t > 0.7 ? '2px solid rgba(255,100,100,0.5)' : '1px solid rgba(255,255,255,0.06)';
+        html += `<div class="heatmap-cell" style="background:hsl(${hue},${sat}%,${lum}%);border:${border}" title="N\u00b0${n}: ${count} fois">
+            <span class="hm-num">${n}</span><span class="hm-count">${count}</span></div>`;
+    }
+    el.innerHTML = html;
+}
+
+// --- RENDER LOTO ---
+function renderLoto() {
+    const d = lotoData;
+    heatmap('heatmap', d.hot, 49);
+
+    const hot12 = d.hot.slice(0, 12);
+    bar('chartHot', hot12.map(h => h.num), hot12.map(h => h.count), 'rgba(244,63,94,0.8)', 'Apparitions');
+
+    const cold12 = d.cold.slice(0, 12);
+    bar('chartCold', cold12.map(h => h.num), cold12.map(h => h.count), 'rgba(56,189,248,0.8)', 'Apparitions');
+
+    const gaps = d.gaps.slice(0, 12);
+    const gapColors = gaps.map(g => g.overdue > 2 ? 'rgba(244,63,94,0.8)' : g.overdue > 1.5 ? 'rgba(251,191,36,0.8)' : 'rgba(251,220,100,0.6)');
+    new Chart(document.getElementById('chartGaps'), {
+        type: 'bar', data: {labels: gaps.map(g => g.num), datasets: [{label: 'Ratio', data: gaps.map(g => g.overdue), backgroundColor: gapColors, borderRadius: 6}]}, options: chartOpts
+    });
+
+    new Chart(document.getElementById('chartDist'), {
+        type: 'doughnut',
+        data: {labels: ['Impairs', 'Pairs', 'Bas (1-24)', 'Hauts (25-49)'],
+            datasets: [{data: [d.distribution.odd_pct, d.distribution.even_pct, d.distribution.low_pct, d.distribution.high_pct],
+                backgroundColor: ['#f43f5e', '#38bdf8', '#fbbf24', '#a855f7'], borderWidth: 0}]},
+        options: {responsive: true, plugins: {legend: {labels: {color: '#8b8ba8', font: {size: 12, family: 'Inter'}}}}}
+    });
+
+    bar('chartPairs', d.pairs.map(p => `${p.pair[0]}-${p.pair[1]}`), d.pairs.map(p => p.count), 'rgba(52,211,153,0.8)', 'Ensemble');
+
+    const comp = d.composite.slice(0, 15);
+    const maxS = Math.max(...comp.map(c => c.score));
+    const compColors = comp.map(c => { const t = c.score/maxS; return `rgba(${130+t*125},${80-t*30},${255-t*80},0.85)`; });
+    new Chart(document.getElementById('chartComposite'), {
+        type: 'bar', data: {labels: comp.map(c => c.num), datasets: [{label: 'Score', data: comp.map(c => c.score), backgroundColor: compColors, borderRadius: 6}]}, options: chartOpts
+    });
+
+    // Last draws
+    const el = document.getElementById('lastDraws');
+    let html = '<table><thead><tr><th>Date</th><th>Numeros</th><th>Chance</th></tr></thead><tbody>';
+    d.last_draws.forEach(dr => {
+        html += `<tr><td>${dr.date}</td><td class="draw-nums">${dr.numbers.map(n => `<span class="mini-ball">${n}</span>`).join('')}</td><td><span class="mini-ball chance">${dr.chance||'-'}</span></td></tr>`;
+    });
+    html += '</tbody></table>';
+    el.innerHTML = html;
+}
+
+// --- RENDER EURO ---
+function renderEuro() {
+    const d = euroData;
+    heatmap('euroHeatmap', d.hot, 50);
+
+    const hot12 = d.hot.slice(0, 12);
+    bar('euroChartHot', hot12.map(h => h.num), hot12.map(h => h.count), 'rgba(99,102,241,0.8)', 'Apparitions');
+
+    bar('euroChartStars', d.hot_stars.map(s => s.num), d.hot_stars.map(s => s.count), 'rgba(251,191,36,0.8)', 'Apparitions');
+
+    const gaps = d.gaps.slice(0, 12);
+    const gapColors = gaps.map(g => g.overdue > 2 ? 'rgba(244,63,94,0.8)' : g.overdue > 1.5 ? 'rgba(251,191,36,0.8)' : 'rgba(251,220,100,0.6)');
+    new Chart(document.getElementById('euroChartGaps'), {
+        type: 'bar', data: {labels: gaps.map(g => g.num), datasets: [{label: 'Ratio', data: gaps.map(g => g.overdue), backgroundColor: gapColors, borderRadius: 6}]}, options: chartOpts
+    });
+
+    const comp = d.composite.slice(0, 15);
+    const maxS = Math.max(...comp.map(c => c.score));
+    const compColors = comp.map(c => { const t = c.score/maxS; return `rgba(${90+t*100},${90+t*10},${241},0.85)`; });
+    new Chart(document.getElementById('euroChartComposite'), {
+        type: 'bar', data: {labels: comp.map(c => c.num), datasets: [{label: 'Score', data: comp.map(c => c.score), backgroundColor: compColors, borderRadius: 6}]}, options: chartOpts
+    });
+
+    bar('euroChartPairs', d.pairs.map(p => `${p.pair[0]}-${p.pair[1]}`), d.pairs.map(p => p.count), 'rgba(52,211,153,0.8)', 'Ensemble');
+
+    new Chart(document.getElementById('euroChartDist'), {
+        type: 'doughnut',
+        data: {labels: ['Impairs', 'Pairs', 'Bas (1-25)', 'Hauts (26-50)'],
+            datasets: [{data: [d.distribution.odd_pct, d.distribution.even_pct, d.distribution.low_pct, d.distribution.high_pct],
+                backgroundColor: ['#f43f5e', '#38bdf8', '#fbbf24', '#6366f1'], borderWidth: 0}]},
+        options: {responsive: true, plugins: {legend: {labels: {color: '#8b8ba8', font: {size: 12, family: 'Inter'}}}}}
+    });
+}
+
+// --- LOTO GENERATOR ---
+document.querySelectorAll('.strategy-btn[data-jeu="loto"]').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        document.querySelectorAll('.strategy-btn[data-jeu="loto"]').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const result = document.getElementById('gridResult');
+        result.classList.remove('hidden');
+        const ballsEl = document.getElementById('gridBalls');
+        ballsEl.innerHTML = '<div class="loading-spinner"></div>';
+        document.getElementById('gridChance').innerHTML = '';
+
+        const res = await fetch(`/api/generate?strategy=${this.dataset.strategy}&jeu=loto`);
+        const data = await res.json();
+        document.getElementById('gridStrategy').textContent = `(${data.strategy})`;
+        document.getElementById('gridExplanation').textContent = data.explanation;
+        ballsEl.innerHTML = '';
+        data.grille.forEach((num, i) => {
+            setTimeout(() => {
+                const ball = document.createElement('div');
+                ball.className = 'ball ball-main pop-in';
+                ball.textContent = num;
+                ballsEl.appendChild(ball);
+            }, i * 180);
+        });
+        setTimeout(() => {
+            document.getElementById('gridChance').innerHTML =
+                `<div class="ball ball-chance pop-in">${data.numero_chance}</div><span class="chance-label">Chance</span>`;
+        }, 1100);
+    });
+});
+
+// --- EURO GENERATOR ---
+document.querySelectorAll('.euro-gen').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        document.querySelectorAll('.euro-gen').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const result = document.getElementById('euroResult');
+        result.classList.remove('hidden');
+        const ballsEl = document.getElementById('euroBalls');
+        const starsEl = document.getElementById('euroStars');
+        ballsEl.innerHTML = '<div class="loading-spinner"></div>';
+        starsEl.innerHTML = '';
+
+        const res = await fetch(`/api/generate?strategy=${this.dataset.strategy}&jeu=euromillions`);
+        const data = await res.json();
+        document.getElementById('euroStrategy').textContent = `(${data.strategy})`;
+        document.getElementById('euroExplanation').textContent = data.explanation;
+        ballsEl.innerHTML = '';
+        data.numeros.forEach((num, i) => {
+            setTimeout(() => {
+                const ball = document.createElement('div');
+                ball.className = 'ball ball-euro pop-in';
+                ball.textContent = num;
+                ballsEl.appendChild(ball);
+            }, i * 180);
+        });
+        setTimeout(() => {
+            data.etoiles.forEach((star, i) => {
+                setTimeout(() => {
+                    const s = document.createElement('div');
+                    s.className = 'ball ball-star pop-in';
+                    s.textContent = star;
+                    starsEl.appendChild(s);
+                }, i * 180);
+            });
+        }, 1000);
+    });
+});
+
+// --- INIT ---
+window.addEventListener('DOMContentLoaded', function() { loadAll(); });
+</script>
+{% endblock %}

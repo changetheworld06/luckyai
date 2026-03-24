@@ -1,120 +1,103 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - LuckyAI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <header>
-        <h1>📌 FAQ - LuckyAI 🎰🤖</h1>
-    </header>
+{% extends "base.html" %}
+{% block title %}Politique de Confidentialite - LuckyAI{% endblock %}
+{% block content %}
+<section class="section page-content">
+    <div class="page-container">
+        <h1>Politique de Confidentialite</h1>
+        <p><em>Derniere mise a jour : 24 mars 2026</em></p>
 
-    <section class="faq">
-        <div class="faq-item">
-            <h2>1️⃣ LuckyAI garantit-il des gains au Loto ou à l’EuroMillions ?</h2>
-            <p>Non. 🎟️ LuckyAI utilise des algorithmes d’intelligence artificielle pour analyser les tendances des tirages passés et générer des grilles optimisées. Toutefois, les jeux de loterie restent basés sur le hasard, et aucun algorithme ne peut garantir un gain.</p>
-        </div>
+        <p>
+            La presente politique de confidentialite decrit la maniere dont le site LuckyAI,
+            edite par Lucky AI (SIRET : 91108759100010), collecte et traite les donnees
+            lors de votre visite, conformement au Reglement General sur la Protection des
+            Donnees (RGPD) et a la loi Informatique et Libertes.
+        </p>
 
-        <div class="faq-item">
-            <h2>2️⃣ Comment fonctionne LuckyAI ?</h2>
-            <p>LuckyAI analyse des milliers de tirages passés pour identifier des tendances et générer des numéros en s’appuyant sur des modèles statistiques avancés. Vous obtenez ensuite une grille optimisée, prête à être jouée.</p>
-        </div>
+        <h2>1. Donnees collectees</h2>
+        <p>
+            LuckyAI ne collecte aucune donnee personnelle identifiante. Aucun formulaire
+            d'inscription, de connexion ou de collecte de donnees nominatives n'est present
+            sur le site.
+        </p>
+        <p>
+            Le site utilise <strong>Google Analytics</strong> a des fins exclusives de mesure
+            d'audience. Les donnees collectees par cet outil sont :
+        </p>
+        <ul>
+            <li>Pages visitees et parcours de navigation</li>
+            <li>Duree des visites</li>
+            <li>Source du trafic (moteur de recherche, lien direct, etc.)</li>
+            <li>Type d'appareil, navigateur et systeme d'exploitation</li>
+            <li>Zone geographique approximative (pays, region)</li>
+        </ul>
+        <p>
+            Ces donnees sont anonymisees et ne permettent pas d'identifier personnellement
+            un utilisateur. L'adresse IP est anonymisee avant stockage.
+        </p>
 
-        <div class="faq-item">
-            <h2>3️⃣ Comment obtenir ma grille optimisée ?</h2>
-            <ul>
-                <li>1️⃣ Choisissez votre jeu (Loto ou EuroMillions).</li>
-                <li>2️⃣ Cliquez sur le bouton pour générer une grille.</li>
-                <li>3️⃣ Découvrez instantanément votre grille optimisée.</li>
-            </ul>
-        </div>
+        <h2>2. Cookies</h2>
+        <p>
+            Le site LuckyAI utilise des cookies dans le cadre de la mesure d'audience via
+            Google Analytics. Ces cookies permettent de distinguer les utilisateurs et de
+            comprendre comment le site est utilise.
+        </p>
+        <p>Les cookies deposes sont :</p>
+        <ul>
+            <li><strong>_ga</strong> : identifiant unique anonyme, duree de 2 ans</li>
+            <li><strong>_ga_*</strong> : conservation de l'etat de session, duree de 2 ans</li>
+        </ul>
+        <p>
+            Conformement a la reglementation, un bandeau de consentement est affiche lors de
+            votre premiere visite. Les cookies de mesure d'audience ne sont deposes qu'apres
+            votre consentement explicite. Vous pouvez retirer votre consentement a tout moment
+            en supprimant les cookies de votre navigateur.
+        </p>
+        <p>
+            Vous pouvez egalement configurer votre navigateur pour refuser les cookies ou
+            etre averti de leur depot. La desactivation des cookies n'affecte pas le
+            fonctionnement du site.
+        </p>
 
-        <div class="faq-item">
-            <h2>4️⃣ Où puis-je jouer ma grille ?</h2>
-            <p>Les grilles générées par LuckyAI doivent être jouées sur les sites ou points de vente officiels de la <strong>Française des Jeux (FDJ)</strong> ou toute autre loterie nationale. LuckyAI n'est pas affilié à la FDJ.</p>
-        </div>
+        <h2>3. Droits des utilisateurs</h2>
+        <p>
+            Conformement au RGPD et a la loi Informatique et Libertes, vous disposez des
+            droits suivants concernant vos donnees :
+        </p>
+        <ul>
+            <li><strong>Droit d'acces</strong> : obtenir la confirmation que des donnees vous concernant sont ou ne sont pas traitees.</li>
+            <li><strong>Droit de rectification</strong> : demander la correction de donnees inexactes.</li>
+            <li><strong>Droit a l'effacement</strong> : demander la suppression de vos donnees.</li>
+            <li><strong>Droit a la limitation</strong> : demander la limitation du traitement de vos donnees.</li>
+            <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos donnees.</li>
+            <li><strong>Droit a la portabilite</strong> : recevoir vos donnees dans un format structure et lisible.</li>
+        </ul>
+        <p>
+            Etant donne que LuckyAI ne collecte aucune donnee personnelle identifiante,
+            ces droits s'appliquent principalement aux donnees de navigation collectees
+            par Google Analytics.
+        </p>
 
-        <div class="faq-item">
-            <h2>5️⃣ LuckyAI est-il totalement gratuit ?</h2>
-            <p>Oui ! ✅ Toutes les grilles sont désormais <strong>100% gratuites</strong>. LuckyAI se finance grâce aux publicités affichées sur le site.</p>
-        </div>
+        <h2>4. Contact - Delegue a la protection des donnees</h2>
+        <p>
+            Pour toute question relative a la protection de vos donnees ou pour exercer
+            vos droits, vous pouvez nous contacter :
+        </p>
+        <p>
+            <strong>Responsable du traitement :</strong> Sebastien Gonin<br>
+            <strong>Email :</strong> <a href="mailto:la.fabrique.des.reves06@gmail.com">la.fabrique.des.reves06@gmail.com</a>
+        </p>
+        <p>
+            En cas de difficulte dans la gestion de vos donnees personnelles, vous pouvez
+            adresser une reclamation a la Commission Nationale de l'Informatique et des
+            Libertes (CNIL) : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>.
+        </p>
 
-        <div class="faq-item">
-            <h2>6️⃣ LuckyAI collecte-t-il mes données personnelles ?</h2>
-            <p>Non. 🔒 LuckyAI ne stocke aucune donnée personnelle. Aucune information bancaire ou personnelle n'est demandée ni enregistrée.</p>
-        </div>
-
-        <div class="faq-item">
-            <h2>7️⃣ Comment puis-je augmenter mes chances de gagner ?</h2>
-            <p>Bien que LuckyAI optimise vos numéros en fonction des tendances, <strong>il n’existe aucune technique infaillible</strong> pour gagner à la loterie. Jouez avec modération et amusez-vous ! 🍀</p>
-        </div>
-
-        <div class="faq-item">
-            <h2>8️⃣ LuckyAI fonctionne-t-il sur mobile ?</h2>
-            <p>Oui ! 📱 Notre site est optimisé pour tous les appareils, que ce soit sur smartphone, tablette ou ordinateur.</p>
-        </div>
-
-        <div class="faq-item">
-            <h2>9️⃣ Comment puis-je contacter LuckyAI ?</h2>
-            <p>Pour toute question ou suggestion, contactez-nous via <strong>la.fabrique.des.reves06@gmail.com</strong> 📩</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>💡 <strong>Jouez intelligemment et avec modération.</strong> Bonne chance à tous ! 🍀🚀 #LuckyAI</p>
-        <p><a href="/">⬅ Retour à l'accueil</a></p>
-    </footer>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #ff5722;
-            font-size: 2.5em;
-        }
-        .faq {
-            max-width: 800px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-        .faq-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #ffffff;
-            border-radius: 5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            font-size: 1.2em;
-            color: #333;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        footer {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #ce5d1b;
-        }
-        footer a {
-            color: #fce00b;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
-
-</body>
-</html>
+        <h2>5. Modification de la politique de confidentialite</h2>
+        <p>
+            Lucky AI se reserve le droit de modifier la presente politique de confidentialite
+            a tout moment. Les modifications prennent effet des leur publication sur le site.
+            Nous vous invitons a consulter cette page regulierement.
+        </p>
+    </div>
+</section>
+{% endblock %}

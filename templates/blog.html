@@ -1,90 +1,21 @@
-<!-- blog.html -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - LuckyAI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-
-    <header>
-        <h1>Blog - LuckyAI</h1>
-    </header>
-
-    <!-- 🖼️ Image de bannière -->
-    <section class="blog-banner">
-        <img src="{{ url_for('static', filename='images/blog_banner.jpg') }}" 
-             alt="Illustration IA et Loto" 
-             style="width:100%; max-height:300px; object-fit:cover;">
-             <a href="https://fr.freepik.com/photos-gratuite/arriere-plan-technologique-tactile-remake-moderne-creation-adam_17851045.htm">Image de rawpixel.com sur Freepik</a>
-    </section>
-
-    <section class="blog-container">
-        <h2>Nos derniers articles</h2>
-        
-        <div class="blog-grid">
-
-            <div class="blog-card">
-                <img src="{{ url_for('static', filename='images/entrainer-la-chance.png') }}" alt="Entraîner la chance">
-                <div class="blog-content">
-                    <h3><a href="{{ url_for('article', slug='entrainer-la-chance') }}">Entraîner la chance : Peut-on influencer le hasard ?</a></h3>
-                    <p>Découvrez comment l’attitude mentale, la préparation et les outils d’analyse peuvent jouer un rôle dans ce que l’on appelle la “chance”.</p>
-                </div>
-            </div>
-    
-            <div class="blog-card">
-                <img src="{{ url_for('static', filename='images/optimiser-chances-loto.png') }}" alt="Optimiser ses chances">
-                <div class="blog-content">
-                    <h3><a href="{{ url_for('article', slug='optimiser-chances-loto') }}">Comment maximiser ses chances au Loto et à l'EuroMillions ?</a></h3>
-                    <p>Découvrez des stratégies et conseils pour optimiser vos grilles et éviter les erreurs les plus courantes.</p>
-                </div>
-            </div>
-    
-            <div class="blog-card">
-                <img src="{{ url_for('static', filename='images/ia-et-probabilites.png') }}" alt="IA et hasard">
-                <div class="blog-content">
-                    <h3><a href="{{ url_for('article', slug='ia-et-probabilites') }}">L’IA et les probabilités : Peut-on prédire le hasard ?</a></h3>
-                    <p>L’intelligence artificielle peut-elle vraiment détecter des schémas dans des jeux purement aléatoires ?</p>
-                </div>
-            </div>
-
-        <!-- 📌 Article 3 -->
-        <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/psychologie_argent.png') }}" alt="Psychologie de l'argent">
-            <div class="blog-content">
-                <h3><a href="{{ url_for('article', slug='psychologie-et-argent') }}">La psychologie de l’argent : Comment nos émotions influencent nos décisions</a></h3>
-                <p>Comprendre les biais cognitifs pour mieux gérer son argent.</p>
-                <a class="read-more" href="{{ url_for('article', slug='psychologie-et-argent') }}">Lire l'article ➝</a>
-            </div>
+{% extends "base.html" %}
+{% block title %}Blog - LuckyAI{% endblock %}
+{% block description %}Decouvrez nos articles sur l'analyse statistique du Loto, les probabilites, l'intelligence artificielle et les strategies pour optimiser vos jeux.{% endblock %}
+{% block canonical %}/blog{% endblock %}
+{% block content %}
+<section class="section page-content">
+    <div style="max-width:1000px;margin:0 auto;">
+        <h1 style="text-align:center;font-size:2.5em;margin-bottom:12px;">Blog LuckyAI</h1>
+        <p style="text-align:center;color:var(--text-dim);margin-bottom:40px;font-size:1.05em;">Explorez nos articles sur l'intelligence artificielle, les probabilites, la psychologie du jeu et les strategies pour mieux comprendre les loteries.</p>
+        <div class="blog-hub-grid">
+            {% for article in articles %}
+            <a href="/blog/{{ article.slug }}" class="blog-hub-card">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.desc }}</p>
+                <span class="card-meta">{{ article.category }} | {{ article.date }}</span>
+            </a>
+            {% endfor %}
         </div>
-
-        <!-- 📌 Article 4 -->
-        <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/strategie_gains.png') }}" alt="Stratégie gains">
-            <div class="blog-content">
-                <h3><a href="{{ url_for('article', slug='strategie-gains-loterie') }}">Que faire si vous gagnez à la loterie ?</a></h3>
-                <p>Conseils pour bien gérer son argent après un gain important.</p>
-                <a class="read-more" href="{{ url_for('article', slug='strategie-gains-loterie') }}">Lire l'article ➝</a>
-            </div>
-        </div>
-
-        <!-- 📌 Article 5 -->
-        <div class="blog-card">
-            <img src="{{ url_for('static', filename='images/ia_loto_help.png') }}" alt="IA Loto">
-            <div class="blog-content">
-                <h3><a href="{{ url_for('ia_et_loto') }}">L’IA peut-elle vraiment vous aider à gagner au Loto ?</a></h3>
-                <p>Découvrez les limites et opportunités de l'IA dans la prédiction des numéros gagnants.</p>
-                <a class="read-more" href="{{ url_for('ia_et_loto') }}">Lire l'article ➝</a>
-            </div>
-        </div>
-
-    </section>
-
-    <footer>
-        <p><a href="/">⬅ Retour à l'accueil</a></p>
-    </footer>
-
-</body>
-</html>
+    </div>
+</section>
+{% endblock %}

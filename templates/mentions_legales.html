@@ -1,25 +1,62 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentions Légales - Lucky AI</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>📜 Mentions Légales</h1>
-    <p><strong>Éditeur du site :</strong> Lucky AI</p>
-    <p>Email : la.fabrique.des.reves06@gmail.com</p>
-    <p>Numéro SIRET : 91108759100010</p>
+{% extends "base.html" %}
+{% block title %}Mentions Legales - LuckyAI{% endblock %}
+{% block content %}
+<section class="section page-content">
+    <div class="page-container">
+        <h1>Mentions Legales</h1>
 
-    <p><strong>Hébergeur :</strong> Render</p>
-    <p>Adresse : 475 Valencia St, San Francisco, CA 94103, USA</p>
-    <p>Site web : <a href="https://render.com" target="_blank">https://render.com</a></p>
+        <h2>Editeur du site</h2>
+        <p>
+            Le site LuckyAI est edite par :<br>
+            <strong>Lucky AI</strong><br>
+            Responsable de la publication : Sebastien Gonin<br>
+            Email : <a href="mailto:la.fabrique.des.reves06@gmail.com">la.fabrique.des.reves06@gmail.com</a><br>
+            SIRET : 91108759100010
+        </p>
 
-    <p><strong>Directeur de publication :</strong> Sébastien Gonin</p>
+        <h2>Hebergeur</h2>
+        <p>
+            Le site est heberge par :<br>
+            <strong>Render</strong><br>
+            475 Valencia St, San Francisco, CA 94103, USA<br>
+            Site web : <a href="https://render.com" target="_blank" rel="noopener noreferrer">render.com</a>
+        </p>
 
-    <p>Le site LuckyAI.fr et son contenu sont protégés par le droit d’auteur.</p>
+        <h2>Propriete intellectuelle</h2>
+        <p>
+            L'ensemble des contenus presents sur le site LuckyAI (textes, graphismes, images, logos,
+            icones, logiciels, base de donnees, structure du site) est protege par les dispositions
+            du Code de la propriete intellectuelle et appartient a Lucky AI ou fait l'objet d'une
+            autorisation d'utilisation.
+        </p>
+        <p>
+            Toute reproduction, representation, modification, publication, transmission ou
+            denaturation, totale ou partielle, du site ou de son contenu, par quelque procede
+            que ce soit et sur quelque support que ce soit, est interdite sans l'autorisation
+            ecrite prealable de Lucky AI.
+        </p>
 
-    <p><a href="/">⬅ Retour à l'accueil</a></p>
-</body>
-</html>
+        <h2>Responsabilite</h2>
+        <p>
+            Les informations fournies sur le site LuckyAI le sont a titre purement informatif
+            et statistique. LuckyAI ne garantit en aucun cas l'exactitude, la completude ou
+            l'actualite des informations diffusees.
+        </p>
+        <p>
+            Le Loto est un jeu de hasard. Les analyses et suggestions de grilles proposees
+            par LuckyAI ne constituent en aucun cas une garantie de gain. L'utilisateur est
+            seul responsable de l'utilisation qu'il fait des informations fournies par le site.
+        </p>
+        <p>
+            Lucky AI ne saurait etre tenu responsable des dommages directs ou indirects
+            resultant de l'utilisation du site ou de l'impossibilite d'y acceder.
+        </p>
+
+        <h2>Droit applicable</h2>
+        <p>
+            Les presentes mentions legales sont regies par le droit francais. En cas de litige,
+            les tribunaux francais seront seuls competents.
+        </p>
+    </div>
+</section>
+{% endblock %}
