@@ -363,21 +363,39 @@ class EuroMillionsAnalyzer:
             scores.append({"num": num, "score": round(composite, 4)})
         return sorted(scores, key=lambda x: -x["score"])
 
-    def generate_grid(self, strategy="composite"):
-        if strategy == "composite":
-            scores = {x["num"]: x["score"] for x in self.composite_scores()}
-        elif strategy == "hot":
-            scores = {x["num"]: x["count"] + 1 for x in self.hot_numbers(30)}
-        elif strategy == "cold":
-            scores = {x["num"]: x["overdue"] + 0.1 for x in self.gaps()}
-        else:
-            scores = {x["num"]: x["score"] for x in self.composite_scores()}
-
-        # Pick 5 numbers (1-50)
+    def _euro_gen_balanced(self):
+        # Equilibre pairs/impairs (2-3) et bas/hauts (<=25)
+        scores = {x["num"]: x["score"] for x in self.composite_scores()}
         nums = np.arange(1, self.max_num + 1)
         w = np.array([scores.get(n, 0.01) for n in nums], dtype=float)
         w = w / w.sum()
-        chosen = sorted([int(x) for x in np.random.choice(nums, size=5, replace=False, p=w)])
+        for _ in range(100):
+            chosen = sorted([int(x) for x in np.random.choice(nums, size=5, replace=False, p=w)])
+            pairs = sum(1 for n in chosen if n % 2 == 0)
+            low = sum(1 for n in chosen if n <= 25)
+            if pairs in (2, 3) and low in (2, 3):
+                return chosen
+        # Fallback : top 5 du composite
+        return sorted([x["num"] for x in self.composite_scores()[:5]])
+
+    def generate_grid(self, strategy="composite"):
+        if strategy == "balanced":
+            chosen = self._euro_gen_balanced()
+        else:
+            if strategy == "composite":
+                scores = {x["num"]: x["score"] for x in self.composite_scores()}
+            elif strategy == "hot":
+                scores = {x["num"]: x["count"] + 1 for x in self.hot_numbers(30)}
+            elif strategy == "cold":
+                scores = {x["num"]: x["overdue"] + 0.1 for x in self.gaps()}
+            else:
+                scores = {x["num"]: x["score"] for x in self.composite_scores()}
+
+            # Pick 5 numbers (1-50)
+            nums = np.arange(1, self.max_num + 1)
+            w = np.array([scores.get(n, 0.01) for n in nums], dtype=float)
+            w = w / w.sum()
+            chosen = sorted([int(x) for x in np.random.choice(nums, size=5, replace=False, p=w)])
 
         # Pick 2 stars (1-12) weighted
         star_sc = {x["num"]: x["score"] for x in self.star_scores()}
@@ -390,6 +408,7 @@ class EuroMillionsAnalyzer:
             "composite": "Combine frequence recente, retard et historique global",
             "hot": "Favorise les numeros les plus tires recemment",
             "cold": "Favorise les numeros en retard excessif",
+            "balanced": "Grille optimisee avec un ratio pair/impair (2-3) et bas/hauts (<=25) equilibres.",
         }
         return {"numeros": chosen, "etoiles": stars, "strategy": strategy,
                 "explanation": explanations.get(strategy, explanations["composite"])}
