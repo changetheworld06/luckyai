@@ -18,7 +18,7 @@
         <p class="hero-sub">Notre IA analyse <strong id="totalDraws">...</strong> tirages historiques pour detecter les patterns statistiques et generer des grilles optimisees.</p>
         <div class="hero-stats">
             <div class="stat-pill"><span id="lastDate">...</span><small>Dernier tirage</small></div>
-            <div class="stat-pill"><span id="euroDraws">...</span><small>Tirages EuroMillions</small></div>
+            <div class="stat-pill"><span id="totalDrawsPill">...</span><small>Tirages historiques</small></div>
             <div class="stat-pill"><span>4</span><small>Strategies IA</small></div>
         </div>
         <a href="#generator" class="cta-btn">Generer une grille</a>
@@ -92,7 +92,7 @@
 <!-- LOTO GENERATOR -->
 <section id="generator" class="section">
     <h2 class="section-title">Generateur de grilles Loto</h2>
-    <p class="section-desc">Choisissez une strategie basee sur notre analyse de 2733 tirages</p>
+    <p class="section-desc">Choisissez une strategie basee sur notre analyse de <span id="lotoTotalDescr">...</span> tirages</p>
 
     <div class="strategy-buttons">
         <button class="strategy-btn active" data-strategy="composite" data-jeu="loto">
@@ -176,6 +176,11 @@
             <canvas id="euroChartDist"></canvas>
         </div>
     </div>
+
+    <div class="card full-width">
+        <h3>Derniers tirages EuroMillions</h3>
+        <div id="euroLastDraws" class="draws-table"></div>
+    </div>
 </section>
 
 <!-- EURO GENERATOR -->
@@ -241,8 +246,19 @@ document.querySelectorAll('.game-tab').forEach(tab => {
         const game = this.dataset.game;
         document.querySelectorAll('.game-section').forEach(s => s.classList.remove('active'));
         document.getElementById(game === 'loto' ? 'loto-section' : 'euro-section').classList.add('active');
+        updatePills(game);
     });
 });
+
+// --- PILLS (hero stats) ---
+function updatePills(game) {
+    const d = game === 'euro' ? euroData : lotoData;
+    if (!d) return;
+    const total = d.total_draws.toLocaleString();
+    document.getElementById('totalDraws').textContent = total;
+    document.getElementById('totalDrawsPill').textContent = total;
+    document.getElementById('lastDate').textContent = d.last_draw_date || '-';
+}
 
 // --- LOAD DATA ---
 async function loadAll() {
@@ -254,9 +270,7 @@ async function loadAll() {
     euroData = await eRes.json();
     renderLoto();
     renderEuro();
-    document.getElementById('totalDraws').textContent = lotoData.total_draws.toLocaleString();
-    document.getElementById('lastDate').textContent = lotoData.last_draw_date;
-    document.getElementById('euroDraws').textContent = euroData.total_draws.toLocaleString();
+    updatePills('loto');
 }
 
 // --- CHART DEFAULTS ---
@@ -331,6 +345,10 @@ function renderLoto() {
         type: 'bar', data: {labels: comp.map(c => c.num), datasets: [{label: 'Score', data: comp.map(c => c.score), backgroundColor: compColors, borderRadius: 6}]}, options: chartOpts
     });
 
+    // Total dans la description du generateur
+    const descr = document.getElementById('lotoTotalDescr');
+    if (descr) descr.textContent = d.total_draws.toLocaleString();
+
     // Last draws
     const el = document.getElementById('lastDraws');
     let html = '<table><thead><tr><th>Date</th><th>Numeros</th><th>Chance</th></tr></thead><tbody>';
@@ -373,6 +391,19 @@ function renderEuro() {
                 backgroundColor: ['#f43f5e', '#38bdf8', '#fbbf24', '#6366f1'], borderWidth: 0}]},
         options: {responsive: true, plugins: {legend: {labels: {color: '#8b8ba8', font: {size: 12, family: 'Inter'}}}}}
     });
+
+    // Last draws EuroMillions
+    const el = document.getElementById('euroLastDraws');
+    if (el && d.last_draws) {
+        let html = '<table><thead><tr><th>Date</th><th>Numeros</th><th>Etoiles</th></tr></thead><tbody>';
+        d.last_draws.forEach(dr => {
+            const nums = dr.numbers.map(n => `<span class="mini-ball">${n}</span>`).join('');
+            const stars = dr.stars.map(s => `<span class="mini-ball chance">${s}</span>`).join('');
+            html += `<tr><td>${dr.date || '-'}</td><td class="draw-nums">${nums}</td><td class="draw-nums">${stars}</td></tr>`;
+        });
+        html += '</tbody></table>';
+        el.innerHTML = html;
+    }
 }
 
 // --- LOTO GENERATOR ---

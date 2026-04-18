@@ -394,6 +394,18 @@ class EuroMillionsAnalyzer:
         return {"numeros": chosen, "etoiles": stars, "strategy": strategy,
                 "explanation": explanations.get(strategy, explanations["composite"])}
 
+    # --- Derniers tirages ---
+    def last_draws(self, n=10):
+        results = []
+        for i in range(max(0, self.total - n), self.total):
+            date = str(self.dates[i])[:10] if self.dates is not None else None
+            results.append({
+                "date": date,
+                "numbers": sorted([int(x) for x in self.draws[i]]),
+                "stars": sorted([int(x) for x in self.stars[i]]),
+            })
+        return list(reversed(results))
+
     def full_analysis(self):
         result = {
             "total_draws": self.total,
@@ -407,6 +419,7 @@ class EuroMillionsAnalyzer:
             "global_freq": self.global_frequency(),
             "composite": self.composite_scores(),
             "star_scores": self.star_scores(),
+            "last_draws": self.last_draws(10),
         }
         if self.dates is not None:
             result["last_draw_date"] = str(self.dates[-1])[:10]
